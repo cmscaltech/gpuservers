@@ -1,4 +1,4 @@
-FROM caltechcms/singleuser_cuda8_cudnn6_devel
+FROM caltechcms/singleuser_cuda8_cudnn5_devel
 LABEL maintainer "Caltech HEP Group <ml@hep.caltech.edu>"
 
 

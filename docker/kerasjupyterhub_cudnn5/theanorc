@@ -1,0 +1,6 @@
+[nvcc]
+fastmath=True
+flags =  -arch=sm_30
+[global]
+device=cuda
+floatX=float32
