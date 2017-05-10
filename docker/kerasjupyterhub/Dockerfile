@@ -1,19 +1,22 @@
 FROM caltechcms/singleuser_cuda8_cudnn6_devel
+LABEL maintainer "Caltech HEP Group <ml@hep.caltech.edu>"
 
 USER root
 
 RUN apt-get update
 RUN apt-get install -y pciutils
 RUN apt-get install -y cmake
+RUN apt-get install -y git
 
 ## python 2 and 3
 RUN apt-get install -y python
 RUN apt-get install -y python-pip
+RUN pip install --upgrade pip
+RUN pip install ipython
 
 ## python 2 setup with legacy version of keras
 RUN pip2 install keras==1.2.2
 RUN pip2 install theano==0.9.0
-#RUN apt-get install cython=0.25
 RUN pip2 install Cython==0.25.2
 RUN git clone https://github.com/Theano/libgpuarray.git && \
      	cd libgpuarray && \					
@@ -34,9 +37,9 @@ RUN pip2 install h5py
 
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
+RUN pip3 install --upgrade pip
 
 ## python 3 setup with  new version
-RUN pip3 install --upgrade pip
 RUN pip3 install keras
 RUN pip3 install tensorflow-gpu
 RUN pip3 install theano
@@ -48,7 +51,7 @@ RUN pip3 install h5py
 ADD theanorc ../.theanorc
 
 RUN apt-get install -y ssh
-RUN git clone https://github.com/HEPTrkX/heptrkx-dshep17.git
+#RUN git clone https://github.com/HEPTrkX/heptrkx-dshep17.git
 
 ENV KERAS_BACKEND theano
 USER $NB_USER
