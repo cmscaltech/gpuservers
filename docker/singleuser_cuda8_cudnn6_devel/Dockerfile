@@ -1,6 +1,8 @@
 FROM jupyterhub/singleuser
 LABEL maintainer "Caltech HEP Group <ml@hep.caltech.edu>"
 
+# combine jupyterhub/singleuser with the nvidia/cuda from here: https://hub.docker.com/r/nvidia/cuda/, https://gitlab.com/nvidia/cuda
+
 USER root
 
 ######################
