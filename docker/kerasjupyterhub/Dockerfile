@@ -31,7 +31,7 @@ RUN conda install pygpu \
     pandas \
     h5py
 
-RUN pip3 install table
+RUN pip3 install tables
 
 ADD theanorc ../.theanorc
 
