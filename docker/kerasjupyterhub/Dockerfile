@@ -20,7 +20,8 @@ RUN conda install -p $CONDA_DIR/envs/python2 pygpu \
     keras==1.2.2 \
     theano==0.9.0 \
     pandas \
-    h5py
+    h5py \
+    tqdm
 
 RUN pip2 install tensorflow-gpu==0.12.0 tables
 
@@ -29,7 +30,8 @@ RUN conda install pygpu \
     tensorflow-gpu \
     theano \
     pandas \
-    h5py
+    h5py \
+    tqdm
 
 RUN pip3 install tables
 
