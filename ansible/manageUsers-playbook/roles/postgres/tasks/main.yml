@@ -1,0 +1,14 @@
+---
+
+- name: Installing checking for package python-psycopg2
+  yum: name=python-psycopg2 state=present
+
+- name: Creating postgres user
+  postgresql_user: login_host="127.0.0.1" 
+                   login_user="{{ loginuser }}" 
+                   login_password="{{ loginpassword }}" 
+                   db=postgres 
+                   role_attr_flags="{{ role }}" 
+                   name="{{ username }}"  
+                   password="{{ userpassword }}"
+

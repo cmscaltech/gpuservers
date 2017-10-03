@@ -1,0 +1,16 @@
+---
+
+#- name: Generate passwords
+#  shell: python -c 'import crypt; print crypt.crypt("{{ upassword }}", "$6$random_salt")'
+#  register: genpass
+
+- name: Creating user "{{ uusername }}" with admin access
+  user: name={{ uusername }} password={{ upassword |password_hash('sha512') }} groups=admin append=yes
+  when:  assigned_role  == "yes"
+
+- name: Creating users "{{ uusername }}" without admin access
+  user: name={{ uusername }} password={{ genpass.stdout }}
+  when:  assigned_role == "no"
+
+#- name: Expiring password for user "{{ uusername }}"
+#  shell: chage -d 0 "{{ uusername }}"

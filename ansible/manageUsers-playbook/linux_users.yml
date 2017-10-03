@@ -1,0 +1,11 @@
+---
+- hosts: "{{ remote }}"
+  vars: 
+   user_password: "{{ password }}"
+   user_name: "{{ username }}"
+   is_admin: "{{ admin }}"
+  roles:
+    - { role: usercreate ,upassword: "{{ user_password }}",uusername: "{{ user_name }}",assigned_role: "{{ is_admin }}", when:  action  == "create_user" }
+    - { role: gpucreate ,upassword: "{{ user_password }}",uusername: "{{ user_name }}",assigned_role: "{{ is_admin }}",ugroups: "{{ ugroups }}",uhome: "{{ home }}", when:  action  == "gpu_user" }
+    - { role: userdel ,uusername: "{{ user_name }}", when:  action  == "delete_user" }
+

@@ -1,0 +1,5 @@
+---
+- hosts: "{{ remote }}"
+
+  roles:
+  - { role: postgres,login_user: "{{ loginuser }}", login_password: "{{ loginpassword }}" , name: "{{ username }}", password: "{{ userpassword }}", role_attr_flags: "{{ role }}"}  
