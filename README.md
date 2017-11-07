@@ -86,4 +86,15 @@ The password is the linux password.
 If you are connecting using ssh key, as recommended, please contact an admin to get a password.
 The port that is assigned to you is defined in `/bigdata/shared/Software/jupyter/ports` if you are not in there, please contact an admin.
 
+### MPI
 
+mpi is installead on the cluster and will allow to run jobs across the cluster. For this, the main requirement is to have passwd-less access on all machines.
+Set your ssh key for authentication to the host
+<pre>
+mpi-ibanks
+mpi-culture-plate-sm
+mpi-imperium-sm
+mpi-passed-pawn-klmx
+mpi-titans
+</pre>
+which run over the private IP.	
