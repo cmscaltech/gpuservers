@@ -10,7 +10,7 @@ Worker nodes are a follows, in chronological order of creation
 * `passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server, and runs 6 NVidia Titan Z (Pascal) *to be commissioned*
+* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server, and runs 6 NVidia Titan X (Pascal) *to be commissioned*
 
 All server have a public (regular network) and a private (10G) IP.
 SSH key is the prefered authentication. Please let the admins know if you need help setting this up.
@@ -89,12 +89,23 @@ The port that is assigned to you is defined in `/bigdata/shared/Software/jupyter
 ### MPI
 
 mpi is installead on the cluster and will allow to run jobs across the cluster. For this, the main requirement is to have passwd-less access on all machines.
-Set your ssh key for authentication to the host
+Setup your ssh key for authentication to the host
 <pre>
 mpi-ibanks
 mpi-culture-plate-sm
 mpi-imperium-sm
 mpi-passed-pawn-klmx
 mpi-titans
+mpi-flere-imsaho-sm
 </pre>
-which run over the private IP.	
+which run over the private IP.
+
+Create the .openmpi directory and link the file `/bigdata/shared/Software/mpi/mca-params.conf` in it.
+
+Run an mpi test with the command
+<pre>
+mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/03-scatter-gather
+
+mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
+</pre>
+which should both run. Contact the admin if it does not (the debugging options are `--mca odls_base_verbose 100 --mca btl_base_verbose 100`).
