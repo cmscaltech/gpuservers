@@ -104,8 +104,15 @@ Create the .openmpi directory and link the file `/bigdata/shared/Software/mpi/mc
 
 Run an mpi test with the command
 <pre>
-mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/03-scatter-gather
+mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/03-scatter-gather
 
 mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
+
+mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 30 /bigdata/shared/Software/mpi/keras_mnist.py
 </pre>
 which should both run. Contact the admin if it does not (the debugging options are `--mca odls_base_verbose 100 --mca btl_base_verbose 100`).
+
+The default number of slots per node is the number of GPU (as this is the primary usage). One can override this limitation by running
+<pre>
+mpirun --map-by node --hostfile /bigdata/shared/Software/mpi/hostfile -n 100 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
+</pre>
