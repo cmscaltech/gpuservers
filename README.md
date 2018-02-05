@@ -10,7 +10,7 @@ Worker nodes are a follows, in chronological order of creation
 * ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server, and runs 6 NVidia Titan X (Pascal) *to be commissioned*
+* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pasca)
 
 All server have a public (regular network) and a private (10G) IP.
 SSH key is the prefered authentication. Please let the admins know if you need help setting this up.
