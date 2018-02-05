@@ -7,7 +7,7 @@ It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
 * `titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 2 NVidia GeForce GTX Titan X
-* `passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)
+* ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server, and runs 6 NVidia Titan X (Pascal) *to be commissioned*
@@ -108,7 +108,7 @@ mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/So
 
 mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
 
-mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 30 /bigdata/shared/Software/mpi/keras_mnist.py
+mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 10 /bigdata/shared/Software/mpi/keras_mnist.py
 </pre>
 which should both run. Contact the admin if it does not (the debugging options are `--mca odls_base_verbose 100 --mca btl_base_verbose 100`).
 
