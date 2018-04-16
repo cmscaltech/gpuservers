@@ -15,6 +15,15 @@ Worker nodes are a follows, in chronological order of creation
 All server have a public (regular network) and a private (10G) IP.
 SSH key is the prefered authentication. Please let the admins know if you need help setting this up.
 
+## Credits
+
+If you are a user of the cluster, we are happy to help make progress.
+When producing publication or public presentation, please be so kind as to warn Prof. Spiropulu and Dr. Vlimant, just for accounting purpose.
+Please include the following latex acknowledgement for support
+```latex
+Part of this work was conducted at  "\textit{iBanks}", the AI GPU cluster at Caltech. We acknowledge NVIDIA, SuperMicro  and the Kavli Foundation for their support of "\textit{iBanks}".
+```
+
 ### Data Storage
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
