@@ -15,6 +15,8 @@ Worker nodes are a follows, in chronological order of creation
 All server have a public (regular network) and a private (10G) IP.
 SSH key is the prefered authentication. Please let the admins know if you need help setting this up.
 
+The linux password is not centralized yet, and you have to change it locally to secure access to jupyter notebooks.
+ 
 ## Credits
 
 If you are a user of the cluster, we are happy to help make progress.
