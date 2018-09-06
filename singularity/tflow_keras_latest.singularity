@@ -1,0 +1,16 @@
+Bootstrap: docker
+
+#https://www.tensorflow.org/install/install_linux#configure_a_docker_container
+From: docker://tensorflow/tensorflow:latest-gpu
+
+#https://github.com/singularityware/singularity/issues/1616
+%post
+    chmod -R 755 /root
+    pip install -U keras
+
+#can be empty
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    /bin/bash 
