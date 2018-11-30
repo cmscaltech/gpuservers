@@ -7,6 +7,8 @@ From: docker://tensorflow/tensorflow:latest-gpu
 %post
     chmod -R 755 /root
     pip install -U keras
+    pip install -U uproot
+    pip install -U jupyter
 
 #can be empty
 %environment
