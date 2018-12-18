@@ -1,0 +1,15 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+From: docker://pytorch/pytorch:latest
+
+%post
+    /opt/conda/bin/pip install -U uproot
+    /opt/conda/bin/pip install -U jupyter
+
+#can be empty
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    /bin/bash 
