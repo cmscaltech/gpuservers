@@ -26,6 +26,14 @@ Please include the following latex acknowledgement for support
 Part of this work was conducted at  "\textit{iBanks}", the AI GPU cluster at Caltech. We acknowledge NVIDIA, SuperMicro  and the Kavli Foundation for their support of "\textit{iBanks}".
 ```
 
+## Credentials
+
+If you are not familiar on how to create an ssh key, from a remote client (your laptop) run the following command
+<pre>
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+</pre>
+and place the content of the public key in the .ssh/authorize_keys on the ibanks nfs home directory.
+
 ### Data Storage
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
