@@ -1,0 +1,21 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+From: docker://library/julia:latest
+
+%post
+    apt-get update
+    apt-get -y install python3 libpython3-dev python3-dev python3-setuptools build-essential python3-pip
+#    mkdir -p /opt/julia
+#    export JULIA_DEPOT_PATH=/opt/julia
+    /usr/local/julia/bin/julia -e 'using Pkg;Pkg.add("PyCall");Pkg.build("PyCall")'
+    pip3 install -U uproot numpy jupyter
+#    chmod -R 777 /opt/julia
+
+#can be empty
+%environment
+#    JULIA_DEPOT_PATH=/opt/julia
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    /bin/bash 

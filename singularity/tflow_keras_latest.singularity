@@ -5,10 +5,14 @@ From: docker://tensorflow/tensorflow:latest-gpu
 
 #https://github.com/singularityware/singularity/issues/1616
 %post
+    apt-get update
+    apt-get -y install ffmpeg
     chmod -R 755 /root
     pip install -U keras
     pip install -U uproot
     pip install -U jupyter
+    pip install -U statsmodels
+    pip install -U plotly
 
 #can be empty
 %environment

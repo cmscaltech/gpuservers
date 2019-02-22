@@ -9,6 +9,9 @@ images/tflow_keras_latest.simg: tflow_keras_latest.singularity
 images/pytorch.simg: pytorch.singularity
 	sudo singularity build $@ $<
 
+images/cupy.simg: cupy.singularity
+	sudo singularity build $@ $<
+
 
 deploy:
 	cp -R images /nfshome/singularity/

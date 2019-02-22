@@ -1,0 +1,17 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+From: docker://cupy/cupy:latest-python3
+
+%post
+    pip3 install -U uproot
+    pip3 install -U awkward
+    pip3 install -U jupyter
+    pip3 install -U matplotlib
+
+#can be empty
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    /bin/bash 
