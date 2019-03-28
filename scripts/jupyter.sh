@@ -23,4 +23,4 @@ if [ -z $PORT ]; then
 fi
 echo "Using port $PORT"
 
-JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity exec -B /data --nv $SINGULARITY_IMAGE jupyter notebook --certfile $HOME/mycert.pem --keyfile $HOME/mykey.key --ip 0.0.0.0 --port $PORT
+JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity exec -B /data -B /nvmedata --nv $SINGULARITY_IMAGE jupyter notebook --certfile $HOME/mycert.pem --keyfile $HOME/mykey.key --ip 0.0.0.0 --port $PORT

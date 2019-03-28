@@ -15,7 +15,10 @@ images/cupy.simg: cupy.singularity
 images/julia.simg: julia.singularity
 	sudo singularity build $@ $<
 
+images/rapids.simg: rapids.singularity
+	sudo singularity build $@ $<
+
 
 deploy:
-	cp -R images /nfshome/singularity/
+	cp -R images/*.simg /nfshome/singularity/images/
 	chown -R root:gpu-users /nfshome/singularity/
