@@ -1,0 +1,27 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+From: docker://cupy/cupy:latest-python3
+
+%post
+    apt-get update
+    apt-get install -y graphviz
+    apt-get install -y cuda-toolkit-9-2
+    pip3 install -U uproot
+    pip3 install -U awkward
+    pip3 install -U jupyter
+    pip3 install -U matplotlib
+    pip3 install -U dask
+    pip3 install -U distributed
+    pip3 install -U graphviz
+    pip3 install -U numba
+    pip3 install -U arrow
+    pip3 install -U pytest-runner
+    pip3 install -U bokeh
+
+#can be empty
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    /bin/bash 

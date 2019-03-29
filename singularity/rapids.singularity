@@ -1,0 +1,24 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+From: docker://rapidsai/rapidsai:latest
+
+%post
+#    apt-get update -y
+#    /conda/bin/pip install -U cudf-cuda92==0.5.1
+#    /conda/bin/pip install -U uproot
+#    /conda/bin/pip install -U awkward
+#    /conda/bin/pip install -U pyarrow
+#    /conda/bin/pip install -U jupyter
+#    /conda/bin/pip install -U matplotlib
+#    /conda/bin/pip install -U dask
+#    /conda/bin/pip install -U distributed
+#    /conda/bin/pip install -U graphviz
+#    /conda/bin/pip install -U numba
+
+#can be empty
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+
+%runscript
+    bash /rapids/utils/start-jupyter.sh
