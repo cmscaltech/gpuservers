@@ -18,10 +18,14 @@ From: docker://cupy/cupy:latest-python3
     pip3 install -U arrow
     pip3 install -U pytest-runner
     pip3 install -U bokeh
-
+    pip3 install -U snakeviz
+    pip3 install -U yappi
+    pip3 install -U bcolz
+ 
 #can be empty
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+    LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:$LD_LIBRARY_PATH
 
 %runscript
     /bin/bash 
