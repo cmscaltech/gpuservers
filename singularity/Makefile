@@ -18,6 +18,8 @@ images/julia.simg: julia.singularity
 images/rapids.simg: rapids.singularity
 	sudo singularity build $@ $<
 
+images/legacy.simg: ibanks_legacy.singularity
+        sudo singularity build $@ $<
 
 deploy:
 	cp -R images/*.simg /nfshome/singularity/images/
