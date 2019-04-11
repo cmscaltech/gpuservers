@@ -1,0 +1,114 @@
+BootStrap: docker
+#From: docker://nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
+#From: docker://nvidia/cuda:8.0-cudnn7-devel-centos7
+#From: docker://nvidia/cuda:8.0-cudnn5-devel-centos7
+#From: docker://nvidia/cuda:8.0-cudnn5-runtime-centos7
+#From: docker://nvidia/cuda:7.5-cudnn5-devel-centos7
+
+%runscript
+    echo "This is what happens when you run the container..."
+
+
+%post
+    echo "Hello from inside the container"
+
+    yum -y install emacs-nox
+    yum -y install epel-release
+    yum -y install python2 python2-devel python2-pip
+    yum -y install openssl-devel
+
+    yum -y install root.x86_64
+    yum -y install python2-root.x86_64
+    yum -y install python2-jupyroot.x86_64
+    yum -y install python36-root.x86_64
+    yum -y install python36-jupyroot.x86_64
+    
+    yum -y install boost boost-devel
+
+    CUDA_PATH=/usr/local/cuda/
+    LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
+    PATH=$CUDA_PATH/bin:$PATH
+
+    pip2 install --upgrade pip
+    pip2 install --upgrade setuptools
+    pip2 install numpy
+    pip2 install numexpr
+    pip2 install Cython
+    pip2 install gpustat
+    pip2 install graphviz
+    pip2 install h5py
+    pip2 install h5sparse
+    pip2 install ipython
+    pip2 install ipykernel
+    pip2 install Keras
+    pip2 install matplotlib
+    pip2 install memory-profiler
+    pip2 install pandas
+    pip2 install projectq
+    pip2 install pycuda
+    pip2 install scikit-garden
+    pip2 install scikit-hep
+    pip2 install scikit-image
+    pip2 install scikit-learn
+    pip2 install scikit-optimize
+    pip2 install seaborn
+    pip2 install setGPU
+    pip2 install tables
+    pip2 install tensorflow-gpu
+    pip2 install torch
+    pip2 install torchvision
+    pip2 install uproot
+    pip2 install xgboost
+    pip2 install cupy-cuda100
+    pip2 install numba
+
+
+    yum -y install python36 python36-devel python36-pip
+    pip3 install --upgrade pip    
+    pip3 install --upgrade setuptools
+    pip3 install Cython
+    pip3 install gpustat
+    pip3 install gym
+    pip3 install h5py
+    pip3 install h5sparse
+#    pip3 install ipykernel
+#    pip3 install ipython
+    pip3 install jupyter
+#    pip3 install notebook
+#    pip3 install nbconvert
+
+    pip3 install ipykernel
+    python3 -m ipykernel install
+    pip3 install Keras
+    pip3 install keras-rl
+    pip3 install matplotlib
+
+    pip3 install numpy
+    pip3 install pandas
+#    pip3 install projectq
+    pip3 install pycuda
+    pip3 install pydot
+    pip3 install pyjet
+    pip3 install qiskit
+    pip3 install qiskit-aqua
+    pip3 install qiskit-terra
+    pip3 install scikit-garden
+    pip3 install scikit-hep
+    pip3 install scikit-image
+    pip3 install scikit-learn
+    pip3 install scikit-optimize
+    pip3 install scipy
+    pip3 install seaborn
+    pip3 install setGPU
+    pip3 install tensorflow-gpu
+    pip3 install torch
+    pip3 install torchvision
+    pip3 install uproot
+    pip3 install xgboost
+    pip3 install numba
+    pip3 install  cupy-cuda100
+
+%environment
+    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+    LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
