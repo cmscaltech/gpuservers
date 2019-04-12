@@ -83,7 +83,7 @@ Let admins know of any missing library that can be put in the image. A build ser
 To start a shell in an image
 
 <pre>
-XDG_RUNTIME_DIR= LC_ALL=C singularity shell -B /nfshome -B /data -B /bigdata /bigdata/shared/Software/singularity/ibanks/edge.simg
+XDG_RUNTIME_DIR= LC_ALL=C singularity shell -B /nfshome -B /data -B --nv /bigdata /bigdata/shared/Software/singularity/ibanks/edge.simg
 </pre>
 
 
