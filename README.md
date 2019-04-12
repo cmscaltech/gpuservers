@@ -71,7 +71,9 @@ In python one can either set the environment variable or use `import setGPU` (ge
 
 All the software is provided with singularity images located in `/bigdata/shared/Software/singularity/ibanks/`
 Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity
+
 | image | description |
+|-------|-------------|
 | legacy.simg | A fixed image with the software already installed on ibanks nodes |
 | edge.simg | An image with many of the useful libraries, with the latest versions | 
 
