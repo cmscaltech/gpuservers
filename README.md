@@ -6,16 +6,15 @@ The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
 It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
-* `titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 2 NVidia GeForce GTX Titan X
+* `titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 1 NVidia GeForce GTX Titan X
 * ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pasca)
+* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pascal)
+* `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server running 1 NVidia GeForce GTX Titan X
 
 All server have a public (regular network) and a private (10G) IP.
-SSH key is the prefered authentication. Please let the admins know if you need help setting this up.
-
-The linux password is not centralized yet, and you have to change it locally to secure access to jupyter notebooks.
+SSH key is the only authentication. Please let the admins know if you need help setting this up.
  
 ## Credits
 
@@ -42,7 +41,9 @@ The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted 
 
 The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefered temporary location for data needed for intensive I/O.
 
-The 
+The `/t2data/` is the home directory on the caltech Tier2.
+
+The `/mnt/hadoop/` is the readonly access to the full caltech Tier2 storage.
 
 ### Setup
 
@@ -66,72 +67,52 @@ In python one can either set the environment variable or use `import setGPU` (ge
 
 ## Software
 
-### Theano
+### Singularity
 
-The compilation directory might be better off being a local directory, like in /tmp
+All the software is provided with singularity images located in `/bigdata/shared/Software/singularity/ibanks/`
+Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity
+| image | description |
+| legacy.simg | A fixed image with the software already installed on ibanks nodes |
+| edge.simg | An image with many of the useful libraries, with the latest versions | 
+
+Let admins know of any missing library that can be put in the image. A build service will be setup later.
+
+
+To start a shell in an image
+
 <pre>
-mkdir -p /tmp/$USER/theano_compile
-rm -r ~/.theano
-ln -s /tmp/$USER/theano_compile ~/.theano
+XDG_RUNTIME_DIR= LC_ALL=C singularity shell -B /nfshome -B /data -B /bigdata /bigdata/shared/Software/singularity/ibanks/edge.simg
 </pre>
 
-The theano rc file should look like
-<pre>
-[nvcc]
-[global]
-device=cuda
-</pre>
-
-One can add `base_compiledir=/tmp/$USER/theano_compile/` directly in the global section if need be.
 
 ### Tensorflow
 
 Tensorflow is greedy in using GPUs and it is mandatory to use `export CUDA_VISIBLE_DEVICES=n` (where n is the index of a device, or coma separated index) to use only a selected device, if not explicitly controlled within the application.
+In python, please use `import setGPU` that selects automatically the next available GPU.
 
 ### Jupyter Hub
 
-We are building some docker images that are posted on dockerhub: https://hub.docker.com/u/caltechcms/
+Work in progress to set this up properly on the cluster.
 
 ### Jupyter Notebook
 
-The users can start a jupyter notebook server on each machine using the command
+The users can start a jupyter notebook server on each machine using either
 
 <pre>
-source /bigdata/shared/Software/jupyter/restart.sh
+/bigdata/shared/Software/jupyter/start_S.sh
 </pre>
+ 
+ to start a notebook with the latest singularity image. Or 
 
-This will provide back a url to which you can connect.
-The password is the linux password.
-If you are connecting using ssh key, as recommended, please contact an admin to get a password.
+<pre>
+/bigdata/shared/Software/jupyter/start_S.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg
+</pre>
+if a given image.
+
+This will provide back a url to which you can connect, including an authentication token, that changes each time you restart the jupyter server. You should keep this token private, but can also share momentarily to let other people edit your notebooks ; beware anyone with the token is "you".
+
 The port that is assigned to you is defined in `/bigdata/shared/Software/jupyter/ports` if you are not in there, please contact an admin.
 
 ### MPI
 
-mpi is installead on the cluster and will allow to run jobs across the cluster. For this, the main requirement is to have passwd-less access on all machines.
-Setup your ssh key for authentication to the host
-<pre>
-mpi-ibanks
-mpi-culture-plate-sm
-mpi-imperium-sm
-mpi-passed-pawn-klmx
-mpi-titans
-mpi-flere-imsaho-sm
-</pre>
-which run over the private IP.
-
-Create the .openmpi directory and link the file `/bigdata/shared/Software/mpi/mca-params.conf` in it.
-
-Run an mpi test with the command
-<pre>
-mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/03-scatter-gather
-
-mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 18 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
-
-mpirun --hostfile /bigdata/shared/Software/mpi/hostfile -n 10 /bigdata/shared/Software/mpi/keras_mnist.py
-</pre>
-which should both run. Contact the admin if it does not (the debugging options are `--mca odls_base_verbose 100 --mca btl_base_verbose 100`).
-
-The default number of slots per node is the number of GPU (as this is the primary usage). One can override this limitation by running
-<pre>
-mpirun --map-by node --hostfile /bigdata/shared/Software/mpi/hostfile -n 100 /bigdata/shared/Software/mpi/mpi4py-examples/08-matrix-matrix-product
-</pre>
+mpi is not available at the moment
