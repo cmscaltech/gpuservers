@@ -26,6 +26,9 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     
     yum -y install boost boost-devel
 
+    yum install nodejs -y
+    npm install -g configurable-http-proxy
+
     CUDA_PATH=/usr/local/cuda/
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
     PATH=$CUDA_PATH/bin:$PATH
@@ -72,14 +75,15 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install gym
     pip3 install h5py
     pip3 install h5sparse
-#    pip3 install ipykernel
-#    pip3 install ipython
+
     pip3 install jupyter
-#    pip3 install notebook
-#    pip3 install nbconvert
+    pip3 install jupyterlab
+    jupyter serverextension enable --py jupyterlab --sys-prefix
+    pip3 install jupyterhub
 
     pip3 install ipykernel
     python3 -m ipykernel install
+
     pip3 install Keras
     pip3 install keras-rl
     pip3 install matplotlib
