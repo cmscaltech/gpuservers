@@ -63,6 +63,7 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip2 install torch
     pip2 install torchvision
     pip2 install uproot
+    pip2 install root_numpy
     pip2 install xgboost
     pip2 install cupy-cuda100
     pip2 install numba
@@ -90,8 +91,8 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install matplotlib
 
     pip3 install numpy
+    pip3 install numexpr
     pip3 install pandas
-#    pip3 install projectq
     pip3 install pycuda
     pip3 install pydot
     pip3 install pyjet
@@ -107,10 +108,12 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install scipy
     pip3 install seaborn
     pip3 install setGPU
+    pip3 install tables
     pip3 install tensorflow-gpu
     pip3 install torch
     pip3 install torchvision
     pip3 install uproot
+    pip3 install root_numpy
     pip3 install xgboost
     pip3 install numba
     pip3 install  cupy-cuda100
