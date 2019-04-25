@@ -82,12 +82,14 @@ Configuration of the images is located at https://github.com/cmscaltech/gpuserve
 Let admins know of any missing library that can be put in the image. A build service will be setup later.
 
 
-To start a shell in an image
-
+To start a shell in an cutting edge image
 <pre>
-XDG_RUNTIME_DIR= LC_ALL=C singularity shell -B /nfshome -B /data -B --nv /bigdata /bigdata/shared/Software/singularity/ibanks/edge.simg
+/bigdata/shared/Software/singularity/start.sh
 </pre>
-
+or to start with a given image
+<pre>
+/bigdata/shared/Software/singularity/start.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg 
+</pre>
 
 ### Tensorflow
 
