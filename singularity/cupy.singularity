@@ -21,6 +21,7 @@ From: docker://cupy/cupy:latest-python3
     pip3 install -U snakeviz
     pip3 install -U yappi
     pip3 install -U bcolz
+    pip3 install -U xrootd
  
 #can be empty
 %environment

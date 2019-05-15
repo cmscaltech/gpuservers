@@ -9,6 +9,8 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
 %runscript
     echo "This is what happens when you run the container..."
 
+%files
+    /bigdata/shared/Software/dwave/sapi-python-client-3.0-linux64 /opt/sapi-python-client-3.0-linux64
 
 %post
     echo "Hello from inside the container"
@@ -67,7 +69,10 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip2 install xgboost
     pip2 install cupy-cuda100
     pip2 install numba
+    pip2 install tqdm
 
+    python2 /opt/sapi-python-client-3.0-linux64/install.py
+    pip2 install dwave-neal
 
     yum -y install python36 python36-devel python36-pip
     pip3 install --upgrade pip    
@@ -110,6 +115,8 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install setGPU
     pip3 install tables
     pip3 install tensorflow-gpu
+    pip3 install graph-nets
+#    pip3 install tensorflow_probability_gpu
     pip3 install torch
     pip3 install torchvision
     pip3 install uproot
@@ -117,6 +124,7 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install xgboost
     pip3 install numba
     pip3 install  cupy-cuda100
+    pip3 install tqdm
 
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
