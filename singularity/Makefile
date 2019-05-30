@@ -12,6 +12,9 @@ images/pytorch.simg: pytorch.singularity
 images/cupy.simg: cupy.singularity
 	sudo singularity build $@ $<
 
+images/cupy-cuda-91.simg: cupy-cuda-91.singularity
+	sudo singularity build $@ $<
+
 images/julia.simg: julia.singularity
 	sudo singularity build $@ $<
 

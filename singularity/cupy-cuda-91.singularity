@@ -2,10 +2,10 @@ Bootstrap: docker
 
 #https://github.com/pytorch/pytorch#docker-image
 #From: docker://cupy/cupy:latest-python3
-From: docker://nvidia/cuda:10.1-cudnn7-devel-centos7
+From: docker://nvidia/cuda:9.1-cudnn7-devel-centos7
 
 %post
-    yum install -y cuda-toolkit-10-1
+    yum install -y cuda-toolkit-9-1
     yum install -y tbb
     yum install -y bzip2
     yum install -y boost
@@ -13,7 +13,7 @@ From: docker://nvidia/cuda:10.1-cudnn7-devel-centos7
     bash Anaconda3-2019.03-Linux-x86_64.sh -b -u -p /opt/anaconda3
     PATH=/opt/anaconda3/bin:$PATH
     conda install -y tbb
-    pip install -U cupy-cuda101
+    pip install -U cupy-cuda91
     pip install -U uproot awkward
 #    yum install -y python3
 #    pip3 install -U cupy uproot awkward jupyter matplotlib numba yappi
