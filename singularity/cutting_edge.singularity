@@ -123,9 +123,9 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install root_numpy
     pip3 install xgboost
     pip3 install numba
-    pip3 install  cupy-cuda100
+    pip3 install cupy-cuda100
     pip3 install tqdm
 
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
-    LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.0/compat/:$LD_LIBRARY_PATH
