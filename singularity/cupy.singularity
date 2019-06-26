@@ -5,16 +5,20 @@ Bootstrap: docker
 From: docker://nvidia/cuda:10.1-cudnn7-devel-centos7
 
 %post
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     yum install -y cuda-toolkit-10-1
     yum install -y tbb
     yum install -y bzip2
     yum install -y boost
+    yum install -y boost-devel
     curl -k https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh -o Anaconda3-2019.03-Linux-x86_64.sh
     bash Anaconda3-2019.03-Linux-x86_64.sh -b -u -p /opt/anaconda3
     PATH=/opt/anaconda3/bin:$PATH
     conda install -y tbb
     pip install -U cupy-cuda101
     pip install -U uproot awkward
+
+    yum -y install root.x86_64
 #    yum install -y python3
 #    pip3 install -U cupy uproot awkward jupyter matplotlib numba yappi
 #    apt-get update

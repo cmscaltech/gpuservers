@@ -1,6 +1,7 @@
 BootStrap: docker
 #From: docker://nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
+#From: docker://nvidia/cuda:10.1-cudnn7-devel-centos7
 #From: docker://nvidia/cuda:8.0-cudnn7-devel-centos7
 #From: docker://nvidia/cuda:8.0-cudnn5-devel-centos7
 #From: docker://nvidia/cuda:8.0-cudnn5-runtime-centos7
@@ -10,7 +11,8 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     echo "This is what happens when you run the container..."
 
 %files
-    /bigdata/shared/Software/dwave/sapi-python-client-3.0-linux64 /opt/sapi-python-client-3.0-linux64
+    /bigdata/shared/Software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
+    /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
 
 %post
     echo "Hello from inside the container"
@@ -28,8 +30,13 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     
     yum -y install boost boost-devel
 
+    yum -y install openssh-server openssh-clients 
+    yum -y install rsh rsh-server
+
     yum install nodejs -y
     npm install -g configurable-http-proxy
+
+    yum install -y texlive-pdftex texlive-latex-bin texlive-texconfig* texlive-latex* texlive-metafont* texlive-cmap* texlive-ec texlive-fncychap* texlive-pdftex-def texlive-fancyhdr* texlive-titlesec* texlive-multirow texlive-framed* texlive-wrapfig* texlive-parskip* texlive-caption texlive-ifluatex* texlive-collection-fontsrecommended texlive-collection-latexrecommended
 
     CUDA_PATH=/usr/local/cuda/
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
@@ -68,10 +75,13 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip2 install root_numpy
     pip2 install xgboost
     pip2 install cupy-cuda100
+    pip2 install cupy-cuda101
     pip2 install numba
     pip2 install tqdm
-
-    python2 /opt/sapi-python-client-3.0-linux64/install.py
+    pip2 install energyflow
+    
+    pip2 install pycurl
+    python2 /opt/sapi-python-client/install.py
     pip2 install dwave-neal
 
     yum -y install python36 python36-devel python36-pip
@@ -124,8 +134,27 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install xgboost
     pip3 install numba
     pip3 install cupy-cuda100
+    pip3 install cupy-cuda101
     pip3 install tqdm
+    pip3 install energyflow
+    pip3 install dm-sonnet
 
+    MPI_PATH=/opt/openmpi-3.1.0
+
+    PATH=$MPI_PATH/bin/:$PATH
+    LD_LIBRARY_PATH=$MPI_PATH/lib/:$LD_LIBRARY_PATH
+    OPAL_PREFIX=$MPI_PATH
+    ls $MPI_PATH/lib/
+    pip3 install mpi4py
+    
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
-    LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-10.0/compat/:$LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/compat/:$LD_LIBRARY_PATH
+    CUDA_PATH=/usr/local/cuda/
+    LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
+    PATH=$CUDA_PATH/bin:$PATH
+    MPI_PATH=/opt/openmpi-3.1.0
+#    MPI_PATH=/bigdata/shared/Software/mpi/openmpi-3.1.0
+    PATH=$MPI_PATH/bin:$PATH
+    LD_LIBRARY_PATH=$MPI_PATH/lib:$LD_LIBRARY_PATH
+    OPAL_PREFIX=$MPI_PATH
