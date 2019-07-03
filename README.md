@@ -6,7 +6,7 @@ The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
 It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
-* `titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 1 NVidia GeForce GTX Titan X
+* ~~`titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 1 NVidia GeForce GTX Titan X~~
 * ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
