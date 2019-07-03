@@ -43,9 +43,11 @@ The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefer
 
 The `/imdata/` volume is a ramdisk of 40G with very high throughput, but utilizing the RAM of the machine. Please use this in case of need of very high i/o, but clean the space tightly, as this will use the node memory. There is a 2-day-last-access retention policy on it.
 
-The `/t2data/` is the home directory on the caltech Tier2.
+The `/t2data/` path is the home directory on the caltech Tier2.
 
-The `/mnt/hadoop/` is the readonly access to the full caltech Tier2 storage.
+The `/mnt/hadoop/` path is the readonly access to the full caltech Tier2 storage.
+
+The `/storage/group/gpu` path is a 120TB CEPH volume that can be used similarly to bigdata.
 
 ### Setup
 
