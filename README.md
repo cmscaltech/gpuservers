@@ -93,6 +93,13 @@ or to start with a given image
 /bigdata/shared/Software/singularity/start.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg 
 </pre>
 
+To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
+To build the image from the spec
+<pre>
+SINGULARITY_TMPDIR=/data/$USER SINGULARITY_CACHEDIR=/data/$USER singularity build image.simg specification.singularity
+</pre>
+if you make changes to existing image, please provide suggestion via a pull request modifying the specification file.
+
 ### Tensorflow
 
 Tensorflow is greedy in using GPUs and it is mandatory to use `export CUDA_VISIBLE_DEVICES=n` (where n is the index of a device, or coma separated index) to use only a selected device, if not explicitly controlled within the application.
