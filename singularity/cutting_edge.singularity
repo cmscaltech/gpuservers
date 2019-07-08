@@ -38,6 +38,8 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
 
     yum install -y texlive-pdftex texlive-latex-bin texlive-texconfig* texlive-latex* texlive-metafont* texlive-cmap* texlive-ec texlive-fncychap* texlive-pdftex-def texlive-fancyhdr* texlive-titlesec* texlive-multirow texlive-framed* texlive-wrapfig* texlive-parskip* texlive-caption texlive-ifluatex* texlive-collection-fontsrecommended texlive-collection-latexrecommended
 
+    yum -y install nvidia-driver
+
     CUDA_PATH=/usr/local/cuda/
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
     PATH=$CUDA_PATH/bin:$PATH
@@ -69,8 +71,10 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip2 install setGPU
     pip2 install tables
     pip2 install tensorflow-gpu
-    pip2 install torch
-    pip2 install torchvision
+    #pip2 install torch
+    #pip2 install torchvision
+    pip install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp27-cp27mu-linux_x86_64.whl
+    pip install https://download.pytorch.org/whl/cu100/torchvision-0.3.0-cp27-cp27mu-linux_x86_64.whl
     pip2 install uproot
     pip2 install root_numpy
     pip2 install xgboost
@@ -79,10 +83,12 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip2 install numba
     pip2 install tqdm
     pip2 install energyflow
+    pip2 install prettytable
     
     pip2 install pycurl
     python2 /opt/sapi-python-client/install.py
     pip2 install dwave-neal
+
 
     yum -y install python36 python36-devel python36-pip
     pip3 install --upgrade pip    
@@ -127,8 +133,10 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install tensorflow-gpu
     pip3 install graph-nets
 #    pip3 install tensorflow_probability_gpu
-    pip3 install torch
-    pip3 install torchvision
+    #pip3 install torch
+    #pip3 install torchvision
+    pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp36-cp36m-linux_x86_64.whl
+    pip3 install https://download.pytorch.org/whl/cu100/torchvision-0.3.0-cp36-cp36m-linux_x86_64.whl
     pip3 install uproot
     pip3 install root_numpy
     pip3 install xgboost
@@ -138,6 +146,7 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install tqdm
     pip3 install energyflow
     pip3 install dm-sonnet
+    pip3 install prettytable
 
     MPI_PATH=/opt/openmpi-3.1.0
 
@@ -149,12 +158,11 @@ From: docker://nvidia/cuda:10.0-cudnn7-devel-centos7
     
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
-    LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/compat/:$LD_LIBRARY_PATH
     CUDA_PATH=/usr/local/cuda/
+    #LD_LIBRARY_PATH=$CUDA_PATH/compat:$CUDA_PATH/lib64:$LD_LIBRARY_PATH
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
     PATH=$CUDA_PATH/bin:$PATH
     MPI_PATH=/opt/openmpi-3.1.0
-#    MPI_PATH=/bigdata/shared/Software/mpi/openmpi-3.1.0
     PATH=$MPI_PATH/bin:$PATH
     LD_LIBRARY_PATH=$MPI_PATH/lib:$LD_LIBRARY_PATH
     OPAL_PREFIX=$MPI_PATH
