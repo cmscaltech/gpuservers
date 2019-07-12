@@ -24,8 +24,11 @@ images/rapids.simg: rapids.singularity
 images/legacy.simg: ibanks_legacy.singularity
 	sudo singularity build $@ $<
 
+images/trackml.simg: trackml.singularity
+	sudo singularity build $@ $<
+
 images/edge.simg: cutting_edge.singularity
-	sudo SINGULARITY_CACHEDIR=/storage/ singularity build $@ $<
+	sudo singularity build $@ $<
 
 deploy:
 	cp -R images/*.simg /nfshome/singularity/images/
