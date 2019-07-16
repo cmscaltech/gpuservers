@@ -28,6 +28,7 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
     pip install -U yappi
 
     conda install -y tensorflow-gpu keras 
+    conda install -y scipy
 #can be empty
 %environment
     PATH=/opt/anaconda3/bin:$PATH
