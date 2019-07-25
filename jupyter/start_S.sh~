@@ -1,0 +1,50 @@
+#!/bin/bash
+
+mkdir /tmp/$USER/ipython -p
+if [ -L $HOME/.ipython ] ; then
+    echo "ipython set properly"
+else
+    echo "making a symlink for ipython"
+    rm -rf $HOME/.ipython
+    ln -s /tmp/$USER/ipython $HOME/.ipython
+fi
+
+mhome=""
+mcert=""
+mdata=""
+mbdata=""
+mimdata=""
+mt2data=""
+mthadoop=""
+if [ -d "/nfshome" ] ; then
+    mhome="-B /nfshome"
+fi
+if [ -d "/etc/grid-security/letsencrypt" ] ; then
+    mcert="-B /etc/grid-security/letsencrypt"
+fi
+if [ -d "/data" ] ; then
+    mdata="-B /data"
+fi
+if [ -d "/bigdata" ] ; then
+    mbdata="-B /bigdata"
+fi
+if [ -d "/imdata" ] ; then
+    mimdata="-B /imdata"
+fi
+if [ -d "/t2data" ] ; then
+    mt2data="-B /t2data"
+fi
+if [ -d "/mnt/hadoop" ] ; then
+    mthadoop="-B /mnt/hadoop"
+fi
+
+
+img=/bigdata/shared/Software/singularity/ibanks/edge.simg
+if [ ! -z $1 ] ; then
+    echo using $1 as image
+    img=$1
+fi
+
+## mount point need to be reviewed
+set -x 
+XDG_RUNTIME_DIR="" JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity exec $mhome $mcert $mdata $mbdata $mimdata $mt2data $mthadoop --nv $img /bigdata/shared/Software/jupyter/start.sh

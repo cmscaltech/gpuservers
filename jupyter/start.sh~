@@ -1,0 +1,3 @@
+#!/bin/bash
+
+jupyter notebook --config /bigdata/shared/Software/jupyter/jupyter_notebook_config_S.py
