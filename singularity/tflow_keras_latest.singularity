@@ -1,7 +1,8 @@
 Bootstrap: docker
 
 #https://www.tensorflow.org/install/install_linux#configure_a_docker_container
-From: docker://tensorflow/tensorflow:latest-gpu
+#From: docker://tensorflow/tensorflow:latest-gpu
+From: tensorflow/tensorflow:latest-gpu
 
 #https://github.com/singularityware/singularity/issues/1616
 %post
