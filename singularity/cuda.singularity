@@ -3,6 +3,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
 
 %post
     yum -y install emacs-nox
+    yum -y install epel-release
     yum -y install nvidia-driver
 
     
