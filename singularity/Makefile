@@ -3,33 +3,33 @@ all: images/tflow_keras_latest.simg images/pytorch.simg images/cupy.simg images/
 images:
 	mkdir -f images
 
-images/tflow_keras_latest.simg: tflow_keras_latest.singularity
-	sudo singularity build $@ $<
+images/cuda.simg: cuda.singularity
+	./build $@ $<
 
 images/pytorch.simg: pytorch.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/cupy.simg: cupy.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/cupy-cuda-91.simg: cupy-cuda-91.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/julia.simg: julia.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/rapids.simg: rapids.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/legacy.simg: ibanks_legacy.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/trackml.simg: trackml.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 images/edge.simg: cutting_edge.singularity
-	sudo singularity build $@ $<
+	./build $@ $<
 
 deploy:
-	cp -R images/*.simg /nfshome/singularity/images/
-	chown -R root:gpu-users /nfshome/singularity/
+	cp -R images/*.simg /bigdata/shared/Software/singularity/ibanks/
+	chown -R root:gpu-users /bigdata/shared/Software/singularity/ibanks/
