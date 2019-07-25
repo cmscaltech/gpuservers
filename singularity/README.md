@@ -4,5 +4,6 @@ The recipe to build the singularity image is in tflow_keras_latest.singularity. 
 
 ## Running the image
 
-For jupyter notebook refer to https://github.com/cmscaltech/gpuservers#jupyter-notebook 
-To run an image refere to https://github.com/cmscaltech/gpuservers#singularity
+For jupyter notebook refer to https://github.com/cmscaltech/gpuservers#jupyter-notebook.
+
+To run an image refer to https://github.com/cmscaltech/gpuservers#singularity.
