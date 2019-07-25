@@ -290,7 +290,7 @@ c.NotebookApp.notebook_dir = u'/nfshome/'
 
 ## The port the notebook server will listen on.
 
-c.NotebookApp.port = json.loads(open('./jupyter/ports').read())[os.getenv('USER')]
+c.NotebookApp.port = json.loads(open('/bigdata/shared/Software/gpuservers/jupyter/ports').read())[os.getenv('USER')]
 print(os.getenv('USER'),"on port",c.NotebookApp.port)
 ## The number of additional ports to try if the specified port is not available.
 #c.NotebookApp.port_retries = 50

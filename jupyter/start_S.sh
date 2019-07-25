@@ -17,5 +17,5 @@ fi
 
 ## mount point need to be reviewed
 set -x 
-singularity/run.sh $img jupyter/start.sh
+/bigdata/shared/Software/gpuservers/singularity/run.sh $img /bigdata/shared/Software/gpuservers/jupyter/start.sh
 

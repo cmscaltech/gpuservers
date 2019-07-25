@@ -1,3 +1,3 @@
 #!/bin/bash
 
-jupyter notebook --config jupyter/jupyter_notebook_config_S.py
+jupyter notebook --config  /bigdata/shared/Software/gpuservers/jupyter/jupyter_notebook_config_S.py
