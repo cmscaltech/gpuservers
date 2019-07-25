@@ -1,0 +1,11 @@
+#!/bin/bash
+
+recipe=$1
+image=$2
+
+export SINGULARITY_TMPDIR=/data/$USER/sbuild/
+mkdir -p $SINGULARITY_TMPDIR
+export SINGULARITY_CACHEDIR=/data/$USER/scache/
+mkdir -p $SINGULARITY_TMPDIR
+
+sudo singularity build $image $recipe
