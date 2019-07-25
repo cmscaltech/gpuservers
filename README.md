@@ -6,12 +6,11 @@ The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
 It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
-* ~~`titans.hep.caltech.edu` is an MSI desktop with 2TB of local disk, and runs 1 NVidia GeForce GTX Titan X~~
 * ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pascal)
-* `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server running 1 NVidia GeForce GTX Titan X
+* `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server with 2T of local NVME running 2 NVidia GeForce GTX Titan X
 
 All server have a public (regular network) and a private (10G) IP.
 SSH key is the only authentication. Please let the admins know if you need help setting this up.
@@ -74,7 +73,7 @@ In python one can either set the environment variable or use `import setGPU` (ge
 ### Singularity
 
 All the software is provided with singularity images located in `/bigdata/shared/Software/singularity/ibanks/`
-Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity
+Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity and in `/bigdata/shared/Software/gpuservers/singularity/`
 
 | image | description |
 |-------|-------------|
@@ -86,17 +85,17 @@ Let admins know of any missing library that can be put in the image. A build ser
 
 To start a shell in an cutting edge image
 <pre>
-/bigdata/shared/Software/singularity/start.sh
+/bigdata/shared/Software/gpuservers/singularity/run.sh
 </pre>
 or to start with a given image
 <pre>
-/bigdata/shared/Software/singularity/start.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg 
+/bigdata/shared/Software/gpuservers/singularity/run.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg 
 </pre>
 
 To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
-To build the image from the spec
+To build the image `myimage.simg` from the spec
 <pre>
-SINGULARITY_TMPDIR=/data/$USER SINGULARITY_CACHEDIR=/data/$USER singularity build image.simg specification.singularity
+/bigdata/shared/Software/gpuservers/singularity/build myimage.simg specification.singularity
 </pre>
 if you make changes to existing image, please provide suggestion via a pull request modifying the specification file.
 
@@ -114,13 +113,13 @@ Work in progress to set this up properly on the cluster.
 The users can start a jupyter notebook server on each machine using either
 
 <pre>
-/bigdata/shared/Software/jupyter/start_S.sh
+/bigdata/shared/Software/gpuservers/jupyter/start_S.sh
 </pre>
  
  to start a notebook with the latest singularity image. Or 
 
 <pre>
-/bigdata/shared/Software/jupyter/start_S.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg
+/bigdata/shared/Software/gpuservers/jupyter/start_S.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg
 </pre>
 if a given image.
 
