@@ -1,0 +1,12 @@
+BootStrap: docker
+From: nvidia/cuda:10.0-cudnn7-devel-centos7
+
+%post
+    yum -y install emacs-nox
+    yum -y install nvidia-driver
+
+    
+%environment
+    CUDA_PATH=/usr/local/cuda/
+    LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
+    PATH=$CUDA_PATH/bin:$PATH

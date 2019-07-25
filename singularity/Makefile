@@ -3,7 +3,7 @@ all: images/tflow_keras_latest.simg images/pytorch.simg images/cupy.simg images/
 images:
 	mkdir -f images
 
-images/tflow_keras_latest.simg: tflow_keras_latest.singularity
+images/cuda.simg: cuda.singularity
 	./build $@ $<
 
 images/pytorch.simg: pytorch.singularity
