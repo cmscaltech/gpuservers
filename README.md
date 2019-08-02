@@ -7,7 +7,7 @@ It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
 * ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
-* `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
+* `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080 (old setup, will not work a priori with new accounts)
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pascal)
 * `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server with 2T of local NVME running 2 NVidia GeForce GTX Titan X
