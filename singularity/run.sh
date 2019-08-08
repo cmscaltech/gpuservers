@@ -23,9 +23,11 @@ fi
 if [ -d "/mnt/hadoop" ] ; then
     binding=$binding" -B /mnt/hadoop"
 fi
-if [ -d "/storage" ] ; then
-    binding=$binding" -B /storage"
-fi
+# Do not bind /storage as we need it to unmount and mount it back. One way is to kill all locks on /storage or make sure no one is mounting it. Once puppet is happy on gpu machines this can be re-enabled. See details here: https://github.com/cmscaltech/puppet-centos7/issues/603
+# TODO: 2019-08-08 put it back next week (I hope no one is running workflows for a week)
+#if [ -d "/storage" ] ; then
+#    binding=$binding" -B /storage"
+#fi
 
 ex=""
 img=/bigdata/shared/Software/singularity/ibanks/edge.simg
