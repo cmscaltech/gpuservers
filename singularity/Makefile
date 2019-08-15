@@ -1,4 +1,4 @@
-all: images/tflow_keras_latest.simg images/pytorch.simg images/cupy.simg images/julia.simg
+all: images/pytorch.simg images/cupy.simg images/julia.simg images/legacy.simg images/edge.simg
 
 images:
 	mkdir -f images
@@ -32,4 +32,4 @@ images/edge.simg: cutting_edge.singularity
 
 deploy:
 	cp -R images/*.simg /bigdata/shared/Software/singularity/ibanks/
-	chown -R root:gpu-users /bigdata/shared/Software/singularity/ibanks/
+	chown -R root:gpuusers /bigdata/shared/Software/singularity/ibanks/
