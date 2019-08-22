@@ -48,6 +48,17 @@ The `/mnt/hadoop/` path is the readonly access to the full caltech Tier2 storage
 
 The `/storage/group/gpu` path is a 120TB CEPH volume that can be used similarly to bigdata.
 
+#### CERNbox
+
+You can synchronize your cernbox with local directory `/storage/user/$USER/cernbox` by launching
+```
+/bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
+```
+this can be run in the background, ON ONE NODE ONLY, using 
+```
+SCREEN -S cernbox -d -m /bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
+```
+
 ### Setup
 
 It is important to note that I/O on the nfs mounted volume is not as efficient as with local disk, so please use care and monitor performance of your applications.
