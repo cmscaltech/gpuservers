@@ -6,14 +6,13 @@ The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
 It has a public (regular network) and a private (10G) IP.
 
 Worker nodes are a follows, in chronological order of creation
-* ~~`passed-pawn-klmx.hep.caltech.edu` is a cocolink server with 200G local disk, and runs 8  NVidia Titan X (Pascal)~~
-* `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080 (old setup, will not work a priori with new accounts)
+* `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
 * `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp (Pascal)
+* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp
 * `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server with 2T of local NVME running 2 NVidia GeForce GTX Titan X
 
 All server have a public (regular network) and a private (10G) IP.
-SSH key is the only authentication. Please let the admins know if you need help setting this up.
+SSH key is the only authentication. Please let the admins (t2admin AT hep.caltech.edu) in case of issues.
  
 ## Credits
 
@@ -63,7 +62,7 @@ SCREEN -S cernbox -d -m /bigdata/shared/Software/gpuservers/scripts/sync-cernbox
 
 It is important to note that I/O on the nfs mounted volume is not as efficient as with local disk, so please use care and monitor performance of your applications.
 
-For ipython, the following directory better be local
+For ipython, the following directory has to be local
 <pre>
 mkdir /tmp/$USER/ipython -p
 ln -s /tmp/$USER/ipython .ipython
