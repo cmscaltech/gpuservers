@@ -80,6 +80,10 @@ In python one can either set the environment variable or use `import setGPU` (ge
 
 ## Software
 
+### CVMFS
+
+cvmfs is mounted on the nodes and can be used accordingly.
+
 ### Singularity
 
 All the software is provided with singularity images located in `/bigdata/shared/Software/singularity/ibanks/`
