@@ -55,7 +55,7 @@ You can synchronize your cernbox with local directory `/storage/user/$USER/cernb
 ```
 this can be run in the background, ON ONE NODE ONLY, using 
 ```
-SCREEN -S cernbox -d -m /bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
+screen -S cernbox -d -m /bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
 ```
 
 ### Setup
