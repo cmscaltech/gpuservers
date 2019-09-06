@@ -15,7 +15,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     /bigdata/shared/Software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
     /bigdata/shared/Software/rigetti/forest-sdk-2.10.0-linux-rpm /opt/forest-sdk
     /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
-    #/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.18.00/x86_64-centos7-gcc48-opt /opt/root
+    /bigdata/shared/Software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
 
 %post
     echo "assumeyes=1" >> /etc/yum.conf
@@ -50,7 +50,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     #cd -
     #source /opt/root/bin/thisroot.sh
 
-        yum -y install root.x86_64
+    yum -y install root.x86_64
     yum -y install root-spectrum.x86_64
     yum -y install python2-root.x86_64
     yum -y install python2-jupyroot.x86_64
@@ -175,7 +175,13 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     OPAL_PREFIX=$MPI_PATH
 
     pip3 install mpi4py==3.0.2
-    
+    ## horovod with NCCL, and MPI
+    rpm -i /opt/nccl.rpm
+    yum -y update
+    yum -y install libnccl libnccl-devel libnccl-static
+    HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 pip3 install --no-cache-dir horovod==0.16.4
+    #0.15.2#0.18.1
+
 %environment
     #source /opt/root/bin/thisroot.sh
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
