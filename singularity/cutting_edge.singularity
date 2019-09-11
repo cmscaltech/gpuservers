@@ -22,6 +22,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     cat /etc/yum.conf
 
     yum -y install emacs-nox
+    yum -y install git
     yum -y install vim-X11 vim-common vim-enhanced vim-minimal
     yum -y install epel-release
     yum -y install python2 python2-devel python2-pip tkinter
@@ -179,8 +180,10 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     rpm -i /opt/nccl.rpm
     yum -y update
     yum -y install libnccl libnccl-devel libnccl-static
-    HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 pip3 install --no-cache-dir horovod==0.16.4
+    #HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 pip3 install --no-cache-dir horovod==0.16.4
     #0.15.2#0.18.1
+
+    HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 pip3 install --no-cache-dir git+https://github.com/horovod/horovod.git
 
 %environment
     #source /opt/root/bin/thisroot.sh
