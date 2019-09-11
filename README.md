@@ -143,20 +143,13 @@ The port that is assigned to you is defined in `/bigdata/shared/Software/jupyter
 
 ### MPI
 
-mpi is available within nodes (but not yet accross nodes). One needs to first some env variables
-<pre>
-MPI_PATH=/opt/openmpi-3.1.0
-PATH=$MPI_PATH/bin/:$PATH
-LD_LIBRARY_PATH=$MPI_PATH/lib/:$LD_LIBRARY_PATH
-OPAL_PREFIX=$MPI_PATH
-</pre>
-
+mpi is available within nodes and accross nodes (as long as you have public-key pass-less ssh between nodes). 
 To run a program with mpi
 <pre>
-mpirun -np 3 nvidia-smi
+mpirun --prefix /opt/openmpi-3.1.0 -np 3 nvidia-smi
 </pre>
 
 To run a program using singularity with mpi
 <pre>
-mpirun -np 3 singularity exec -B /bigdata --nv /bigdata/shared/Software/singularity/ibanks/edge-n.simg python3 /bigdata/shared/Software/mpi/mpi4py-examples/03-scatter-gather
+mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /bigdata --nv /bigdata/shared/Software/singularity/ibanks/edge.simg python3 /bigdata/shared/Software/mpi/mpi4py-examples/03-scatter-gather
 </pre>
