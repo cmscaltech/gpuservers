@@ -35,7 +35,7 @@ and place the content of the public key in the .ssh/authorize_keys on the ibanks
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
 
-The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs. Please use the `/bigdata/shared/` directory and contact the admins if in the need for private directory.
+**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs. Please use the `/bigdata/shared/` directory and contact the admins if in the need for private directory. 
 
 The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefered temporary location for data needed for intensive I/O.
 
@@ -51,11 +51,11 @@ The `/storage/group/gpu` path is a 120TB CEPH volume that can be used similarly 
 
 You can synchronize your cernbox with local directory `/storage/user/$USER/cernbox` by launching
 ```
-/bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
+/storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
 this can be run in the background, ON ONE NODE ONLY, using 
 ```
-screen -S cernbox -d -m /bigdata/shared/Software/gpuservers/scripts/sync-cernbox.sh
+screen -S cernbox -d -m /storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
 
 ### Setup
@@ -99,17 +99,17 @@ Let admins know of any missing library that can be put in the image. A build ser
 
 To start a shell in an cutting edge image
 <pre>
-/bigdata/shared/Software/gpuservers/singularity/run.sh
+/storage/group/gpu/software/gpuservers/singularity/run.sh
 </pre>
 or to start with a given image
 <pre>
-/bigdata/shared/Software/gpuservers/singularity/run.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg 
+/storage/group/gpu/software/gpuservers/singularity/run.sh /storage/group/gpu/software/gpuservers/singularity/ibanks/legacy.simg 
 </pre>
 
 To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
 To build the image `myimage.simg` from the spec
 <pre>
-/bigdata/shared/Software/gpuservers/singularity/build myimage.simg specification.singularity
+/storage/group/gpu/software/gpuservers/singularity/build myimage.simg specification.singularity
 </pre>
 if you make changes to existing image, please provide suggestion via a pull request modifying the specification file.
 
@@ -127,19 +127,19 @@ Work in progress to set this up properly on the cluster.
 The users can start a jupyter notebook server on each machine using either
 
 <pre>
-/bigdata/shared/Software/gpuservers/jupyter/start_S.sh
+/storage/group/gpu/software/gpuservers/jupyter/start_S.sh
 </pre>
  
  to start a notebook with the latest singularity image. Or 
 
 <pre>
-/bigdata/shared/Software/gpuservers/jupyter/start_S.sh /bigdata/shared/Software/singularity/ibanks/legacy.simg
+/storage/group/gpu/software/gpuservers/jupyter/start_S.sh /storage/group/gpu/software/singularity/ibanks/legacy.simg
 </pre>
 if a given image.
 
 This will provide back a url to which you can connect, including an authentication token, that changes each time you restart the jupyter server. You should keep this token private, but can also share momentarily to let other people edit your notebooks ; beware anyone with the token is "you".
 
-The port that is assigned to you is defined in `/bigdata/shared/Software/jupyter/ports` if you are not in there, please contact an admin.
+The port that is assigned to you is defined in `/storage/group/gpu/software/gpuservers/jupyter/ports` if you are not in there, please contact an admin.
 
 ### MPI
 
@@ -151,5 +151,5 @@ mpirun --prefix /opt/openmpi-3.1.0 -np 3 nvidia-smi
 
 To run a program using singularity with mpi
 <pre>
-mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /bigdata --nv /bigdata/shared/Software/singularity/ibanks/edge.simg python3 /bigdata/shared/Software/mpi/mpi4py-examples/03-scatter-gather
+mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /bigdata --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/mpi/mpi4py-examples/03-scatter-gather
 </pre>
