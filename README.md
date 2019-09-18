@@ -151,5 +151,5 @@ mpirun --prefix /opt/openmpi-3.1.0 -np 3 nvidia-smi
 
 To run a program using singularity with mpi
 <pre>
-mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /bigdata --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/mpi/mpi4py-examples/03-scatter-gather
+mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/mpi/mpi4py-examples/03-scatter-gather
 </pre>
