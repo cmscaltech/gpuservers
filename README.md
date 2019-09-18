@@ -103,7 +103,7 @@ To start a shell in an cutting edge image
 </pre>
 or to start with a given image
 <pre>
-/storage/group/gpu/software/gpuservers/singularity/run.sh /storage/group/gpu/software/gpuservers/singularity/ibanks/legacy.simg 
+/storage/group/gpu/software/gpuservers/singularity/run.sh /storage/group/gpu/software/singularity/ibanks/legacy.simg 
 </pre>
 
 To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
