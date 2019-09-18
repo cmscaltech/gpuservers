@@ -35,7 +35,7 @@ and place the content of the public key in the .ssh/authorize_keys on the ibanks
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
 
-**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs. Please use the `/bigdata/shared/` directory and contact the admins if in the need for private directory. 
+**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs.
 
 The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefered temporary location for data needed for intensive I/O.
 
@@ -45,7 +45,7 @@ The `/t2data/` path is the home directory on the caltech Tier2.
 
 The `/mnt/hadoop/` path is the readonly access to the full caltech Tier2 storage.
 
-The `/storage/group/gpu` path is a 120TB CEPH volume that can be used similarly to bigdata.
+The `/storage/group/gpu/shared` path is a 120TB CEPH volume that can be used similarly to bigdata.
 
 #### CERNbox
 
@@ -86,8 +86,8 @@ cvmfs is mounted on the nodes and can be used accordingly.
 
 ### Singularity
 
-All the software is provided with singularity images located in `/bigdata/shared/Software/singularity/ibanks/`
-Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity and in `/bigdata/shared/Software/gpuservers/singularity/`
+All the software is provided with singularity images located in `/storage/group/gpu/software/singularity/ibanks/`
+Configuration of the images is located at https://github.com/cmscaltech/gpuservers/tree/master/singularity and in `/storage/group/gpu/software/singularity/`
 
 | image | description |
 |-------|-------------|
