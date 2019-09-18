@@ -4,10 +4,10 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
 %runscript
     #source /opt/root/bin/thisroot.sh
     python2 -c "import keras"
-    python2 -c "import torch;print(torch.cuda.is_avalaible())"
+    python2 -c "import torch;print(torch.cuda.is_available())"
     python2 -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
     python3 -c "import keras"
-    python3 -c "import torch;print(torch.cuda.is_avalaible())"
+    python3 -c "import torch;print(torch.cuda.is_available())"
     python3 -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
 
 
