@@ -106,6 +106,7 @@ or to start with a given image
 /storage/group/gpu/software/gpuservers/singularity/run.sh /storage/group/gpu/software/singularity/ibanks/legacy.simg 
 </pre>
 
+#### Building an image
 To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
 To build the image `myimage.simg` from the spec
 <pre>
