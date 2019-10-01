@@ -27,6 +27,7 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
 #    pip install -U root_numpy
 
     pip install -U yappi
+    pip install -U setGPU
 
     conda install -y tensorflow-gpu keras 
     conda install -y scipy
