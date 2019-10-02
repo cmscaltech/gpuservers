@@ -11,10 +11,10 @@ elif [ -d "/imdata" ] ; then
     export SINGULARITY_CACHEDIR=/imdata/$USER/scache/
 else
     export SINGULARITY_TMPDIR=$HOME/sbuild/
-    export SINGULARITY_CACHEDIR=$HOME/scache/    
+    export SINGULARITY_CACHEDIR=$HOME/scache/
 fi
 
 mkdir -p $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_CACHEDIR
 
-sudo singularity build $image $recipe
+sudo singularity build --tmpdir $SINGULARITY_TMPDIR $image $recipe
