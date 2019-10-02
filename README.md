@@ -114,6 +114,8 @@ To build the image `myimage.simg` from the spec
 </pre>
 if you make changes to existing image, please provide suggestion via a pull request modifying the specification file.
 
+If you are building on top of an existing image, you can use that image as base and the build time will be greatly reduced. See an example with [https://github.com/cmscaltech/gpuservers/blob/master/singularity/over_edge.singularity][building on top the edge image].
+
 ### Tensorflow
 
 Tensorflow is greedy in using GPUs and it is mandatory to use `export CUDA_VISIBLE_DEVICES=n` (where n is the index of a device, or coma separated index) to use only a selected device, if not explicitly controlled within the application.
