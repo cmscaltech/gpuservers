@@ -121,6 +121,18 @@ If you are building on top of an existing image, you can use that image as base 
 Tensorflow is greedy in using GPUs and it is mandatory to use `export CUDA_VISIBLE_DEVICES=n` (where n is the index of a device, or coma separated index) to use only a selected device, if not explicitly controlled within the application.
 In python, please use `import setGPU` that selects automatically the next available GPU.
 
+#### Tensorboard
+
+To use Tensorboard on iBanks, please forward the port to your local machine with `ssh -L`. For example:
+<pre>
+ssh -L 16006:127.0.0.1:6006 <YourUsername>@<GPUservername>.hep.caltech.edu
+</pre>
+which would forward everything on port 6006 of the server (`127.0.0.1:6006`) to port 16006 of your local machine.
+
+Now launch tensorboard on the machine using a standard `tensorboard --logdir log` with the default `6006` port.
+
+On the local machine, go to http://127.0.0.1:16006 to use the remote Tensorboard.
+
 ### Jupyter Hub
 
 Work in progress to set this up properly on the cluster.
