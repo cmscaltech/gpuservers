@@ -127,7 +127,7 @@ To use Tensorboard on iBanks, please forward the remote port to your local machi
 <pre>
 ssh -L 16006:127.0.0.1:6006 [YourUsername]@[NodeName].hep.caltech.edu
 </pre>
-which would forward everything on port 6006 of the server (`127.0.0.1:6006`) to port 16006 of your local machine.
+which would forward everything on port 6006 of the server to port 16006 of your local machine (`127.0.0.1:16006`).
 
 Now launch tensorboard on the machine using a standard `tensorboard --logdir log` with the default `6006` port.
 
