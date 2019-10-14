@@ -125,7 +125,7 @@ In python, please use `import setGPU` that selects automatically the next availa
 
 To use Tensorboard on iBanks, please forward the remote port to your local machine with `ssh -L`. For example:
 <pre>
-ssh -L 16006:127.0.0.1:6006 \<YourUsername\>@\<GPUservername\>.hep.caltech.edu
+ssh -L 16006:127.0.0.1:6006 [YourUsername]@[NodeName].hep.caltech.edu
 </pre>
 which would forward everything on port 6006 of the server (`127.0.0.1:6006`) to port 16006 of your local machine.
 
