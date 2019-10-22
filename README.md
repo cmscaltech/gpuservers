@@ -138,9 +138,19 @@ The users can start a jupyter notebook server on each machine using either
 <pre>
 /storage/group/gpu/software/gpuservers/jupyter/start_S.sh /storage/group/gpu/software/singularity/ibanks/legacy.simg
 </pre>
-if a given image.
+in a given image.
+
+To start the notebook in screen directly:
+<pre>
+screen -S jupyter -d -m /storage/group/gpu/software/gpuservers/jupyter/start_S.sh
+</pre>
 
 This will provide back a url to which you can connect, including an authentication token, that changes each time you restart the jupyter server. You should keep this token private, but can also share momentarily to let other people edit your notebooks ; beware anyone with the token is "you".
+
+To list the jupyter notebook already running on the machine, and the url to be used, one can run
+<pre>
+/storage/group/gpu/software/singularity/run.sh "jupyter notebook list"
+</pre>
 
 The port that is assigned to you is defined in `/storage/group/gpu/software/gpuservers/jupyter/ports` if you are not in there, please contact an admin.
 
