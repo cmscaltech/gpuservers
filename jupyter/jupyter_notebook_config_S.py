@@ -144,7 +144,8 @@ c.NotebookApp.certfile = '/etc/grid-security/letsencrypt/cert.pem'
 #c.NotebookApp.custom_display_url = u''
 
 ## The default URL to redirect to from `/`
-#c.NotebookApp.default_url = '/tree'
+c.NotebookApp.default_url = '/lab'
+#c.NotebookApp.default_url = '/tree/{}'.format( os.environ.get('USER',''))
 
 ## Disable cross-site-request-forgery protection
 #  
