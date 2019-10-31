@@ -3,3 +3,4 @@ From: /storage/group/gpu/software/singularity/ibanks/edge.simg
 
 %post
 	pip3 install tensorflow-gpu==2.0.0
+        pip3 install torch_geometric torch_sparse torch_scatter torch_cluster
