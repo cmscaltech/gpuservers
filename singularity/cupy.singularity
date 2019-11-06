@@ -12,31 +12,27 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
     yum install -y boost
     yum install -y boost-devel
     yum install -y git
+    yum install -y root root-tmva
+    yum install -y cuda-nsight-10-1
 
-    curl -k https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh -o Anaconda3-2019.03-Linux-x86_64.sh
-    bash Anaconda3-2019.03-Linux-x86_64.sh -b -u -p /usr/local/anaconda3
+    curl -k https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh -o anaconda.sh
+    bash anaconda.sh -b -u -p /usr/local/anaconda3
     PATH=/usr/local/anaconda3/bin:$PATH
-    conda install -y tbb numba cudatoolkit jupyter
-    pip install -U cupy-cuda101
-    pip install -U uproot awkward
+   
+    conda install --channel "intel" -y tbb numba numpy scipy tensorflow==1.14.0 
+    conda install -y cudatoolkit
 
-    yum -y install root root-tmva
-    pip install -U graphviz nvidia_smi
-    pip install -U tqdm
-    pip install -U lz4 cloudpickle
-#    pip install -U root_numpy
+    pip install jupyter
+    pip install yappi
+    pip install setGPU
+    pip install cupy-cuda101
+    pip install keras
+    pip install graphviz tqdm lz4 cloudpickle
+    pip install uproot yappi awkward setGPU nvidia_smi
 
-    pip install -U yappi
-    pip install -U setGPU
-
-    conda install -y tensorflow-gpu keras 
-    conda install -y scipy
-
-    yum -y install cuda-nsight-10-1
 
 %environment
     PATH=/usr/local/anaconda3/bin:$PATH
-    #JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
     LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 %runscript

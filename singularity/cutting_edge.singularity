@@ -157,6 +157,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
     pip3 install dm-sonnet==1.34
     pip3 install prettytable==0.7.2
     pip3 install pyquil
+    pip3 install torch_geometric==1.3.2 torch_sparse==0.4.3 torch_scatter==1.3.2 torch_cluster==1.4.5
 
     ### mpi4py ###
     MPI_PATH=/opt/openmpi-3.1.0
