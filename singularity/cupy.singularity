@@ -18,15 +18,16 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
     curl -k https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh -o anaconda.sh
     bash anaconda.sh -b -u -p /usr/local/anaconda3
     PATH=/usr/local/anaconda3/bin:$PATH
-    
-    conda install -y tbb numba cudatoolkit jupyter
-    conda install -y scipy
-    conda install -y graphviz tqdm lz4 cloudpickle
-    conda install -y tensorflow-gpu keras 
+   
+    conda install --channel "intel" -y tbb numba numpy scipy tensorflow==1.14.0 
+    conda install -y cudatoolkit
 
+    pip install jupyter
     pip install yappi
     pip install setGPU
     pip install cupy-cuda101
+    pip install keras
+    pip install graphviz tqdm lz4 cloudpickle
     pip install uproot yappi awkward setGPU nvidia_smi
 
 
