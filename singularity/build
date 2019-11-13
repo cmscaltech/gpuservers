@@ -3,16 +3,8 @@
 recipe=$2
 image=$1
 
-if [ -d "/data" ] ; then
-    export SINGULARITY_TMPDIR=/data/shared/$USER/sbuild/
-    export SINGULARITY_CACHEDIR=/data/shared/$USER/scache/
-elif [ -d "/imdata" ] ; then
-    export SINGULARITY_TMPDIR=/imdata/$USER/sbuild/
-    export SINGULARITY_CACHEDIR=/imdata/$USER/scache/
-else
-    export SINGULARITY_TMPDIR=$HOME/sbuild/
-    export SINGULARITY_CACHEDIR=$HOME/scache/
-fi
+export SINGULARITY_TMPDIR=$HOME/sbuild/
+export SINGULARITY_CACHEDIR=$HOME/scache/
 
 mkdir -p $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_CACHEDIR
