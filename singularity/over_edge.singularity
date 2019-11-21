@@ -3,3 +3,4 @@ From: /storage/group/gpu/software/singularity/ibanks/edge.simg
 
 %post
         pip3 install tensorflow-gpu==2.0.0
+	pip3 install keras==2.3.1
