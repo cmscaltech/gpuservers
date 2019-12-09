@@ -35,7 +35,6 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
 
 %environment
     PATH=/usr/local/anaconda3/bin:$PATH
-    #JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
     LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 %runscript
