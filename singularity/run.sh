@@ -17,9 +17,6 @@ fi
 if [ -d "/imdata" ] ; then
     binding=$binding" -B /imdata"
 fi
-if [ -d "/t2data" ] ; then
-    binding=$binding" -B /t2data"
-fi
 if [ -d "/mnt/hadoop" ] ; then
     binding=$binding" -B /mnt/hadoop"
 fi
