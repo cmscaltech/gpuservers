@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+set -x
 binding=""
 if [ -d "/nfshome" ] ; then
     binding=$binding" -B /nfshome"
