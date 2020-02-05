@@ -1,15 +1,13 @@
 Bootstrap: docker
 
-#https://github.com/pytorch/pytorch#docker-image
-From: docker://pytorch/pytorch:latest
+From: nvcr.io/nvidia/pytorch:19.10-py3
 
 %post
-    /opt/conda/bin/pip install -U uproot
-    /opt/conda/bin/pip install -U jupyter
+    pip install torch 
+    pip install torch_geometric torch_scatter torch_cluster torch_sparse
 
-#can be empty
 %environment
-    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+    PATH=/opt/local/conda/bin:$PATH
 
 %runscript
     /bin/bash 

@@ -14,7 +14,8 @@ else
     export SINGULARITY_CACHEDIR=$HOME/scache/
 fi
 
+echo $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_CACHEDIR
 
-sudo singularity build --tmpdir $SINGULARITY_TMPDIR $image $recipe
+sudo singularity -dv build --tmpdir $SINGULARITY_TMPDIR --sandbox $image $recipe
