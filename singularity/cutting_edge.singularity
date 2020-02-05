@@ -50,7 +50,7 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
 
     ### rigetti SDK
     cd /opt/forest-sdk
-    ./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
+    echo q | ./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
     cd - 
 
     ### python2 packages ###    
@@ -104,7 +104,8 @@ From: nvidia/cuda:10.0-cudnn7-devel-centos7
 
     ### python3 packages ###    
 
-    pip3 install --upgrade pip    
+    #pip3 install --upgrade pip    
+    #python3 -m pip install --upgrade pip
     pip3 install --upgrade setuptools
     pip3 install Cython==0.29.12
     pip3 install gpustat==0.6.0

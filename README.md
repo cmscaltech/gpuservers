@@ -35,7 +35,7 @@ and place the content of the public key in the .ssh/authorize_keys on the ibanks
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
 
-**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs.
+**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs. The content of `/bigdata/shared` is now available under `/storage/group/gpu/bigdata`
 
 The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefered temporary location for data needed for intensive I/O.
 

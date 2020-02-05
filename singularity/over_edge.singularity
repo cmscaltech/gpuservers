@@ -2,4 +2,21 @@ Bootstrap: localimage
 From: /storage/group/gpu/software/singularity/ibanks/edge.simg
 
 %post
-	pip3 install --no-cache -U torch==1.2.0 torch_geometric torch_sparse torch_cluster torch_scatter
+        pip3 install tensorflow-gpu==2.0.0
+	pip3 install keras==2.3.1
+	pip3 install torch==1.2.0
+	
+	CUDA_PATH=/usr/local/cuda/
+	LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
+	PATH=$CUDA_PATH/bin:$PATH
+	DYLD_LIBRARY_PATH=$CUDA_PATH/lib:$DYLD_LIBRARY_PATH
+	CPATH=$CUDA_PATH/include:$CPATH
+
+	python3 -c "import torch; print(torch.__version__)"
+	python3 -c "import torch; print(torch.cuda.is_available())"
+	python3 -c "import torch; print(torch.version.cuda)"
+	nvcc --version
+
+	pip3 install torch-scatter==1.4.0 torch-sparse==0.4.3 torch-cluster==1.4.5
+	pip3 install torch-spline-conv==1.1.1
+	pip3 install torch-geometric==1.3.2
