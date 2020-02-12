@@ -1,0 +1,5 @@
+export GITHUB_CLIENT_ID=914c9e21cafe8e9d303e
+export GITHUB_CLIENT_SECRET=9ec4786ca46cc6402426bae8ff0b305f66b3d03d
+export OAUTH_CALLBACK_URL='https://culture-plate-sm.hep.caltech.edu/hub/oauth_callback'
+export CONFIGPROXY_AUTH_TOKEN=`openssl rand -hex 32`
+export JPY_COOKIE_SECRET=`openssl rand -hex 32`
