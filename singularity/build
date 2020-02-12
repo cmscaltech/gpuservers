@@ -18,4 +18,4 @@ echo $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_TMPDIR
 mkdir -p $SINGULARITY_CACHEDIR
 
-sudo singularity -dv build --tmpdir $SINGULARITY_TMPDIR --sandbox $image $recipe
+sudo singularity -dv build --tmpdir $SINGULARITY_TMPDIR $image $recipe

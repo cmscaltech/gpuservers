@@ -2,41 +2,37 @@ Bootstrap: docker
 
 #https://github.com/pytorch/pytorch#docker-image
 #From: docker://cupy/cupy:latest-python3
-From: nvidia/cuda:10.0-cudnn7-devel-centos7
+From: centos:7
 
 %post
+    export PIP_NO_CACHE_DIR=1
+
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    yum install -y cuda-toolkit-10-0
     yum install -y tbb
     yum install -y bzip2
     yum install -y boost
     yum install -y boost-devel
     yum install -y git
     yum install -y root root-tmva root-python
-    yum install -y cuda-nsight-10-0
-    
+
     curl -k https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh -o Anaconda3-2019.10-Linux-x86_64.sh
     bash Anaconda3-2019.10-Linux-x86_64.sh -b -u -p /usr/local/anaconda3
     PATH=/usr/local/anaconda3/bin:$PATH
 
-    conda install -y cudatoolkit
-    conda install -y numba numpy scipy
-    pip install tensorflow-gpu==1.15
-    
-    pip install -U setGPU
+    conda install --channel "intel" -y tbb numba numpy scipy tensorflow==2.0.0
+
     pip install -U jupyter
     pip install -U yappi
-    pip install -U cupy-cuda100
     pip install -U keras
     pip install -U graphviz tqdm lz4 cloudpickle
-    pip install -U uproot yappi awkward setGPU nvidia_smi
+    pip install -U uproot yappi awkward nvidia_smi
     pip install -U dask distributed
     pip install -U lz4 xxhash
+    
+    yum clean all
 
 %environment
     PATH=/usr/local/anaconda3/bin:$PATH
-    #JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
-    LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 
 %runscript
     /bin/bash 
