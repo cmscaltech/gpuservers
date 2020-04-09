@@ -1,7 +1,7 @@
 #!/bin/bash
 
-recipe=$2
 image=$1
+recipe=$2
 
 if [ -d "/data" ] ; then
     export SINGULARITY_TMPDIR=/data/shared/$USER/sbuild/
