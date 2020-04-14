@@ -107,14 +107,14 @@ or to start with a given image
 </pre>
 
 #### Building an image
-To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the [https://github.com/cmscaltech/gpuservers/tree/master/singularity][singularity directory], to create your `specification.singularity` file
+To build an image, first make sure that there are not an existing image that is usable, or extendable for your purpose. There are example of image specifications under the (singularity directory)[https://github.com/cmscaltech/gpuservers/tree/master/singularity](singularity directory), to create your `specification.singularity` file
 To build the image `myimage.simg` from the spec
 <pre>
 /storage/group/gpu/software/gpuservers/singularity/build myimage.simg specification.singularity
 </pre>
 if you make changes to existing image, please provide suggestion via a pull request modifying the specification file.
 
-If you are building on top of an existing image, you can use that image as base and the build time will be greatly reduced. See an example with [https://github.com/cmscaltech/gpuservers/blob/master/singularity/over_edge.singularity][building on top the edge image].
+If you are building on top of an existing image, you can use that image as base and the build time will be greatly reduced. See an example with (building on top the edge image)[https://github.com/cmscaltech/gpuservers/blob/master/singularity/over_edge.singularity].
 
 ### Tensorflow
 
