@@ -1,0 +1,36 @@
+Bootstrap: docker
+
+#https://github.com/pytorch/pytorch#docker-image
+#From: docker://cupy/cupy:latest-python3
+From: centos:7
+
+%post
+    export PIP_NO_CACHE_DIR=1
+
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    yum install -y bzip2
+    yum install -y git
+    yum install -y boost boost-devel
+    yum install -y root root-tmva root-python
+
+    curl -k https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh -o Anaconda3-2019.10-Linux-x86_64.sh
+    bash Anaconda3-2019.10-Linux-x86_64.sh -b -u -p /usr/local/anaconda3
+    PATH=/usr/local/anaconda3/bin:$PATH
+
+    conda install --channel "intel" -y tbb numpy scipy numba tensorflow==2.0.0
+
+    pip install -U jupyter
+    pip install -U yappi
+    pip install -U keras
+    pip install -U graphviz tqdm cloudpickle
+    pip install -U uproot yappi awkward nvidia_smi
+    pip install -U dask distributed
+    pip install -U lz4 xxhash
+    
+    yum clean all
+
+%environment
+    PATH=/usr/local/anaconda3/bin:$PATH
+
+%runscript
+    /bin/bash 

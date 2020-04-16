@@ -1,15 +1,23 @@
 Bootstrap: docker
 
-#https://github.com/pytorch/pytorch#docker-image
-From: docker://pytorch/pytorch:latest
+From: nvcr.io/nvidia/pytorch:19.10-py3
 
 %post
-    /opt/conda/bin/pip install -U uproot
-    /opt/conda/bin/pip install -U jupyter
+    export CUDA=cu101
+    export TORCH_CUDA_ARCH_LIST=6.0,7.0
+    pip install torch 
+    pip install torch-scatter==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+    pip install torch-sparse==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+    pip install torch-cluster==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+    pip install torch-spline-conv==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-1.4.0.html
+    pip install torch-geometric
+    pip install dgl-cu101
+    pip install tensorflow
+    pip install tfdlpack-gpu
 
-#can be empty
+
 %environment
-    JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
+    PATH=/opt/local/conda/bin:$PATH
 
 %runscript
     /bin/bash 
