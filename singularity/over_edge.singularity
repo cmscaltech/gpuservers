@@ -19,6 +19,7 @@ From: /storage/group/gpu/software/singularity/ibanks/edge.simg
 
 	#qulacs-gpu
 	scl enable devtoolset-7 -- pip3 install qulacs-gpu
+	scl enable devtoolset-7 -- pip3 install git+https://github.com/cnktysz/pennylane-qulacs@master
 
 	#machine learning
         pip3 install tensorflow-gpu==2.1.0
