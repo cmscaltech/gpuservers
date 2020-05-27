@@ -1,18 +1,40 @@
 # iBanks NVIDIA powered GPU cluster
 
+## Create an account at Caltech T2 / iBanks GPU cluster
+
+Either your postdoc contact at Caltech or the T2 admins (t2admin@hep.caltech.edu) can create an account for you. Send the following info to them:
+
+* your full name and institutional contact email
+* your CERN lxplus account name. If you are not a CERN user, give the access.caltech or other established institutional account name.
+* an SSH public key
+* initial account expiry date, which can be extended upon need (max 4 years from now for Caltech internal, max 1 year for external)
+* an X509 grid certificate distinguished name in the form of: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=... from CRAB Prerequisites - Grid certificate or http://cilogon.org (search for your institute)
+
+The account is created by making a pull request to Caltech Puppet Repo (private only for admins), after which it takes about 1h to propagate to the cluster. The teamwork account needs to be created separately by hand.
+
+## Credentials
+
+If you are not familiar on how to create an ssh key, from a remote client (your laptop) run the following command
+<pre>
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+</pre>
+and place the content of the public key in the ~/.ssh/authorize_keys on any machine (As it is shared file system, same files are available on all machines)
+
 ## Nodes and Access
 
-The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
-It has a public (regular network) and a private (10G) IP.
-
-Worker nodes are a follows, in chronological order of creation
-* `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `imperium-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
-* `flere-imsaho-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 6 NVidia Titan Xp
-* `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server with 2T of local NVME running 2 NVidia GeForce GTX Titan X
+Caltech Tier2 and iBanks GPU Cluster uses share CEPH Shared Filesystem and everyone has it's own home directory on CEPH (default home directory for all users).
 
 All server have a public (regular network) and a private (10G) IP.
-SSH key is the only authentication. Please let the admins (t2admin AT hep.caltech.edu) in case of issues.
+SSH key is the only authentication (Administrators use 2FA). Please let the admins (t2admin AT hep.caltech.edu) in case of issues.
+
+Login nodes:
+* login-1.hep.caltech.edu and login-2.hep.caltech.edu - can be used to access Caltech Tier2 and GPU Clusters. Be aware that login nodes do not have any GPUs attached. (There is an option to use GPU HTcondor Scheduling, but it is WIP now.)
+
+Worker nodes are a follows, in chronological order of creation
+* `culture-plate-sm.hep.caltech.edu` (alias `gpu-ibanks-4.hep.caltech.edu`) is a Supermicro server with 2TB of local SSD, and runs 8 NVidia GeForce GTX 1080
+* `imperium-sm.hep.caltech.edu` (alias `gpu-ibanks-3.hep.caltech.edu`) is a Supermicro server with 2TB of local SSD, and runs 8 NVidia GeForce GTX 1080
+* `flere-imsaho-sm.hep.caltech.edu` (alias `gpu-ibanks-2.hep.caltech.edu`) is a Supermicro server with 2TB of local SSD, and runs 6 NVidia Titan Xp
+* `mawhrin-skel-sm.hep.caltech.edu` (alias `gpu-ibanks-1.hep.caltech.edu`) is a Supermicro server running 2 NVidia GeForce GTX Titan X
  
 ## Credits
 
@@ -23,29 +45,17 @@ Please include the following latex acknowledgement for support
 Part of this work was conducted at  "\textit{iBanks}", the AI GPU cluster at Caltech. We acknowledge NVIDIA, SuperMicro  and the Kavli Foundation for their support of "\textit{iBanks}".
 ```
 
-## Credentials
-
-If you are not familiar on how to create an ssh key, from a remote client (your laptop) run the following command
-<pre>
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-</pre>
-and place the content of the public key in the .ssh/authorize_keys on the ibanks nfs home directory.
-
 ### Data Storage
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
-
-**Being deprecated. Use /storage below** The `/bigdata/` volume is mounted on all nodes. It is a 20TB raid array mounted over nfs. The content of `/bigdata/shared` is now available under `/storage/group/gpu/bigdata`
 
 The `/data/` volume is mounted on some nodes, not all on SSD. This is the prefered temporary location for data needed for intensive I/O.
 
 The `/imdata/` volume is a ramdisk of 40G with very high throughput, but utilizing the RAM of the machine. Please use this in case of need of very high i/o, but clean the space tightly, as this will use the node memory. There is a 2-day-since-last-access retention policy on it.
 
-The `/t2data/` path is the home directory on the caltech Tier2.
+The `/mnt/hadoop/` path is the readonly access to the full Caltech Tier2 Hadoop Storage.
 
-The `/mnt/hadoop/` path is the readonly access to the full caltech Tier2 storage.
-
-The `/storage/group/gpu/shared` path is a 120TB CEPH volume that can be used similarly to bigdata.
+The `/storage/group/gpu/shared` path is CEPH volume
 
 #### CERNbox
 
@@ -59,8 +69,6 @@ screen -S cernbox -d -m /storage/group/gpu/software/gpuservers/scripts/sync-cern
 ```
 
 ### Setup
-
-It is important to note that I/O on the nfs mounted volume is not as efficient as with local disk, so please use care and monitor performance of your applications.
 
 For ipython, the following directory has to be local
 <pre>
