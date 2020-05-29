@@ -326,6 +326,9 @@ print(os.getenv('USER'),"on port",c.NotebookApp.port)
 ## Supply SSL options for the tornado HTTPServer. See the tornado docs for
 #  details.
 #c.NotebookApp.ssl_options = {}
+c.NotebookApp.ssl_options={
+"ssl_version": ssl.PROTOCOL_TLSv1_2
+}
 
 ## Supply overrides for terminado. Currently only supports "shell_command".
 #c.NotebookApp.terminado_settings = {}
