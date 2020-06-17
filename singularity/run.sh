@@ -23,6 +23,9 @@ fi
 if [ -d "/storage" ] ; then
     binding=$binding" -B /storage"
 fi
+if [ -d "/cvmfs" ] ; then
+    binding=$binding" -B /cvmfs"
+fi
 
 ex=""
 img=/storage/group/gpu/software/singularity/ibanks/edge.simg
