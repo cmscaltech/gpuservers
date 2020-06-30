@@ -152,7 +152,7 @@ To list the jupyter notebook already running on the machine, and the url to be u
 /storage/group/gpu/software/singularity/run.sh "jupyter notebook list"
 </pre>
 
-The port that is assigned to you is defined in `/storage/group/gpu/software/gpuservers/jupyter/ports` if you are not in there, please contact an admin.
+The port that is assigned to you is your user id, it should be opened automatically, let an admin know if it's not the case.
 
 ### MPI
 
