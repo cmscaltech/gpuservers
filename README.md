@@ -172,7 +172,7 @@ To run a program using singularity with mpi
 mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/gpuservers/mpi/mpi4py-examples/03-scatter-gather
 </pre>
 
-To run accross nodes, first copy '/storage/group/gpu/software/gpuservers/mpi/mca-params.conf' into the '$HOME/.openmpi/' directory
+To run accross nodes, first copy `/storage/group/gpu/software/gpuservers/mpi/mca-params.conf` into the `$HOME/.openmpi/` directory
 
 <pre>
 mpirun  --prefix /opt/openmpi-3.1.0 --hostfile /storage/group/gpu/software/gpuservers/mpi/hostfile -np 10 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/gpuservers/mpi/mpi4py-examples/03-scatter-gather
