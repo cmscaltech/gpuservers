@@ -29,7 +29,12 @@ If you are not familiar on how to create an ssh key, from a remote client (your 
 <pre>
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 </pre>
-and place the content of the public key in the .ssh/authorize_keys on the ibanks nfs home directory.
+this should create an ssh key (default id_rsa) and a public key (id_rsa.pub). Send content of the public key (id_rsa.pub) to an administrator.
+You can log in to the nodes using
+<pre>
+ssh -i id_rsa flere-imsaho-sm.hep.caltech.edu
+</pre>
+or [configure the ssh client](https://www.ssh.com/ssh/config/) to present the key automatically.
 
 ### Data Storage
 
