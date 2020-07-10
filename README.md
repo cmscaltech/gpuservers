@@ -58,7 +58,7 @@ You can synchronize your cernbox with local directory `/storage/user/$USER/cernb
 ```
 /storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
-this can be run in the background, ON ONE NODE ONLY, using 
+at least once interactively to setup the password. Then it can be run in the background, **on one node only**, using 
 ```
 screen -S cernbox -d -m /storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
