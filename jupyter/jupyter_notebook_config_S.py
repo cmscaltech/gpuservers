@@ -3,6 +3,7 @@
 import socket
 import os 
 import json
+import ssl
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
@@ -292,7 +293,8 @@ c.NotebookApp.notebook_dir = '/storage/user/{}'.format(os.environ.get('USER','')
 
 ## The port the notebook server will listen on.
 
-c.NotebookApp.port = json.loads(open('/storage/group/gpu/software/gpuservers/jupyter/ports').read())[os.getenv('USER')]
+#c.NotebookApp.port = json.loads(open('/storage/group/gpu/software/gpuservers/jupyter/ports').read())[os.getenv('USER')]
+c.NotebookApp.port = os.getuid()
 print(os.getenv('USER'),"on port",c.NotebookApp.port)
 ## The number of additional ports to try if the specified port is not available.
 #c.NotebookApp.port_retries = 50
@@ -326,6 +328,9 @@ print(os.getenv('USER'),"on port",c.NotebookApp.port)
 ## Supply SSL options for the tornado HTTPServer. See the tornado docs for
 #  details.
 #c.NotebookApp.ssl_options = {}
+c.NotebookApp.ssl_options={
+"ssl_version": ssl.PROTOCOL_TLSv1_2
+}
 
 ## Supply overrides for terminado. Currently only supports "shell_command".
 #c.NotebookApp.terminado_settings = {}

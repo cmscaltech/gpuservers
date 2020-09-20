@@ -45,6 +45,20 @@ Please include the following latex acknowledgement for support
 Part of this work was conducted at  "\textit{iBanks}", the AI GPU cluster at Caltech. We acknowledge NVIDIA, SuperMicro  and the Kavli Foundation for their support of "\textit{iBanks}".
 ```
 
+
+## Credentials
+
+If you are not familiar on how to create an ssh key, from a remote client (your laptop) run the following command
+<pre>
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+</pre>
+this should create an ssh key (default id_rsa) and a public key (id_rsa.pub). Send content of the public key (id_rsa.pub) to an administrator.
+You can log in to the nodes using
+<pre>
+ssh -i id_rsa flere-imsaho-sm.hep.caltech.edu
+</pre>
+or [configure the ssh client](https://www.ssh.com/ssh/config/) to present the key automatically.
+
 ### Data Storage
 
 The home directory should be used for software and although there is room, please prevent from putting too much data within your home directory.
@@ -63,7 +77,7 @@ You can synchronize your cernbox with local directory `/storage/user/$USER/cernb
 ```
 /storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
-this can be run in the background, ON ONE NODE ONLY, using 
+at least once interactively to setup the password. Then it can be run in the background, **on one node only**, using 
 ```
 screen -S cernbox -d -m /storage/group/gpu/software/gpuservers/scripts/sync-cernbox.sh
 ```
@@ -160,7 +174,7 @@ To list the jupyter notebook already running on the machine, and the url to be u
 /storage/group/gpu/software/singularity/run.sh "jupyter notebook list"
 </pre>
 
-The port that is assigned to you is defined in `/storage/group/gpu/software/gpuservers/jupyter/ports` if you are not in there, please contact an admin.
+The port that is assigned to you is your user id, it should be opened automatically, let an admin know if it's not the case.
 
 ### MPI
 
@@ -172,5 +186,11 @@ mpirun --prefix /opt/openmpi-3.1.0 -np 3 nvidia-smi
 
 To run a program using singularity with mpi
 <pre>
-mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/mpi/mpi4py-examples/03-scatter-gather
+mpirun --prefix /opt/openmpi-3.1.0 -np 3 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/gpuservers/mpi/mpi4py-examples/03-scatter-gather
+</pre>
+
+To run accross nodes, first copy `/storage/group/gpu/software/gpuservers/mpi/mca-params.conf` into the `$HOME/.openmpi/` directory
+
+<pre>
+mpirun  --prefix /opt/openmpi-3.1.0 --hostfile /storage/group/gpu/software/gpuservers/mpi/hostfile -np 10 singularity exec -B /storage --nv /storage/group/gpu/software/singularity/ibanks/edge.simg python3 /storage/group/gpu/software/gpuservers/mpi/mpi4py-examples/03-scatter-gather
 </pre>
