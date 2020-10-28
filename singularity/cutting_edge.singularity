@@ -75,9 +75,14 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
 
     ### python3 packages ###    
     python3 -m pip install --upgrade pip
-    cat /opt/python3.requirement.txt | xargs -n 1 python3 -m pip install
+    python3 -m pip install --upgrade setuptools
+    python3 -m pip install wheel
+    python3 -m pip install llvmlite==0.34.0 || true ## fails on first attempt
+    python3 -m pip install llvmlite==0.34.0
+    cat /opt/python3.requirement.txt | xargs python3 -m pip install
     jupyter serverextension enable --py jupyterlab --sys-prefix
     python3 -m ipykernel install
+
     ## some remaining python crap
     #python3 -m pip install scikit-garden==0.1.3
 
