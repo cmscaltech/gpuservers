@@ -1,178 +1,99 @@
 BootStrap: docker
-From: nvidia/cuda:10.0-cudnn7-devel-centos7
+#From: nvidia/cuda:11.0-cudnn8-devel-centos7
+#From: nvidia/cuda:10.2-cudnn8-devel-centos7
+#From: nvidia/cuda:10.1-cudnn8-devel-centos7
+From: nvidia/cuda:10.1-cudnn7-devel-centos7
+#From: nvidia/cuda:10.2-cudnn8-devel-centos8
 
 %runscript
-    python2 -c "import keras"
-    python2 -c "import torch;print(torch.cuda.is_available())"
-    python2 -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
     python3 -c "import keras"
     python3 -c "import torch;print(torch.cuda.is_available())"
     python3 -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
 
 
 %files
-    /storage/group/gpu/software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
-    /storage/group/gpu/software/rigetti/forest-sdk-2.10.0-linux-rpm /opt/forest-sdk
+    /storage/group/gpu/software/rigetti/forest-sdk-2.22.0-linux-rpm /opt/forest-sdk
     /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
-    /storage/group/gpu/software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
+    /storage/group/gpu/software/gpuservers/singularity/edge.requirement.txt /opt/python3.requirement.txt
 
 %post
     echo "assumeyes=1" >> /etc/yum.conf
     cat /etc/yum.conf
 
-    yum -y install emacs-nox
-    yum -y install git
-    yum -y install vim-X11 vim-common vim-enhanced vim-minimal
+    ### basics ###
     yum -y install epel-release
-    yum -y install python2 python2-devel python2-pip tkinter
-    yum -y install python36 python36-devel python36-pip python36-tkinter
-
-    yum -y install nvidia-driver
-
+    yum -y install which
+    yum -y install emacs-nox
+    yum -y install vim-X11 vim-common vim-enhanced vim-minimal
+    yum -y install git
+    yum -y install cmake3
+    cp `which cmake3` /usr/bin/cmake
     yum -y install openssl-devel
     yum -y install openssh-server openssh-clients 
     yum -y install rsh rsh-server
-
+    yum -y install nvidia-driver
     yum -y install hdf5-devel
     yum -y install boost boost-devel
     yum -y install nodejs
     npm install -g configurable-http-proxy
 
+    ### gcc7 ###
+    yum -y install centos-release-scl
+    yum -y install devtoolset-7
+
+    ### llvm ###
+    yum -y install llvm9.0 llvm9.0-devel llvm9.0-static
+    ln -s /usr/lib64/llvm9.0/bin/llvm-config /usr/bin/llvm-config
+
+    ### Python ###
+    PYTHON=36
+    yum -y install python${PYTHON} python${PYTHON}-devel python${PYTHON}-pip python${PYTHON}-tkinter python${PYTHON}-venv
+
     ### latex ###
     yum -y install texlive-pdftex texlive-latex-bin texlive-texconfig* texlive-latex* texlive-metafont* texlive-cmap* texlive-ec texlive-fncychap* texlive-pdftex-def texlive-fancyhdr* texlive-titlesec* texlive-multirow texlive-framed* texlive-wrapfig* texlive-parskip* texlive-caption texlive-ifluatex* texlive-collection-fontsrecommended texlive-collection-latexrecommended dvipng
 
+    ### ROOT ###
     yum -y install root.x86_64
     yum -y install root-spectrum.x86_64
-    yum -y install python2-root.x86_64
-    yum -y install python2-jupyroot.x86_64
-    yum -y install python36-root.x86_64
-    yum -y install python36-jupyroot.x86_64
+    yum -y install python${PYTHON}-root.x86_64
+    yum -y install python${PYTHON}-jupyroot.x86_64
 
     ### rigetti SDK
     cd /opt/forest-sdk
-    echo q | ./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
+    ./forest-sdk-2.22.0-linux-rpm.run --accept --quiet
     cd - 
-
-    ### python2 packages ###    
 
     CUDA_PATH=/usr/local/cuda/
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
     PATH=$CUDA_PATH/bin:$PATH
-
-    pip2 install --upgrade pip
-    pip2 install --upgrade setuptools
-    #pip2 install numpy==1.15.4
-    pip2 install numexpr==2.6.9
-    pip2 install Cython==0.29.12
-    pip2 install gpustat==0.6.0
-    pip2 install graphviz==0.11.1
-    pip2 install h5py==2.9.0
-    pip2 install h5sparse==0.1.0
-    pip2 install ipython==5.8.0
-    pip2 install ipykernel==4.10.0
-    pip2 install Keras==2.2.4
-    pip2 install matplotlib==2.2.4
-    pip2 install memory-profiler==0.55.0
-    pip2 install pandas==0.24.2
-    pip2 install projectq==0.4.2
-    pip2 install pycuda==2019.1.1
-    pip2 install scikit-garden==0.1.3
-    pip2 install scikit-hep==0.5.1
-    pip2 install scikit-image==0.14.3
-    pip2 install scikit-learn==0.20.3
-    pip2 install scikit-optimize==0.5.2
-    pip2 install seaborn==0.9.0
-    pip2 install setGPU==0.0.7
-    pip2 install tables==3.5.2
-    pip2 install tensorflow-gpu==1.14.0
-    pip install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp27-cp27mu-linux_x86_64.whl
-    pip install https://download.pytorch.org/whl/cu100/torchvision-0.3.0-cp27-cp27mu-linux_x86_64.whl
-    pip2 install uproot==3.8.0
-    pip2 install root_numpy==4.8.0
-    pip2 install xgboost==0.82
-    pip2 install cupy-cuda100==6.2.0
-    pip2 install numba==0.45.0
-    pip2 install tqdm==4.32.2
-    pip2 install energyflow==0.12.3
-    pip2 install prettytable==0.7.2
-    
-    pip2 install pycurl==7.19.0
-    python2 /opt/sapi-python-client/install.py
-    pip2 install dwave-neal==0.5.1
-    pip2 install numpy==1.16.4 ## possible issue with dwave-neal
-    pip2 install "pyquil<2.0"
-
-    ### python3 packages ###    
-
-    #pip3 install --upgrade pip    
-    #python3 -m pip install --upgrade pip
-    pip3 install --upgrade setuptools
-    pip3 install Cython==0.29.12
-    pip3 install gpustat==0.6.0
-    pip3 install gym==0.13.1
-    pip3 install h5py==2.9.0
-    pip3 install h5sparse==0.1.0
-
-    pip3 install jupyter==1.0.0
-    pip3 install jupyterlab==1.0.2
-    jupyter serverextension enable --py jupyterlab --sys-prefix
-    pip3 install jupyterhub==1.0.0
-
-    pip3 install ipykernel==5.1.1
-    python3 -m ipykernel install
-
-    pip3 install Keras==2.2.4
-    pip3 install keras-rl==0.4.2
-    pip3 install matplotlib==3.1.1
-
-    pip3 install numpy==1.16.4
-    pip3 install numexpr==2.6.9
-    pip3 install pandas==0.25.0
-    pip3 install pycuda==2019.1.1
-    pip3 install pydot==1.4.1
-    pip3 install pyjet==1.5.0
-    pip3 install qiskit==0.11.1
-    pip3 install qiskit-aqua==0.5.3
-    pip3 install qiskit-terra==0.8.2
-    pip3 install scikit-garden==0.1.3
-    pip3 install scikit-hep==0.5.1
-    pip3 install scikit-image==0.15.0
-    pip3 install scikit-learn==0.21.2
-    pip3 install scikit-optimize==0.5.2
-    pip3 install imbalanced-learn==0.5.0
-    pip3 install scipy==1.3.0
-    pip3 install seaborn==0.9.0
-    pip3 install setGPU==0.0.7
-    pip3 install tables==3.5.2
-    pip3 install tensorflow-gpu==1.14.0
-    pip3 install graph-nets==1.0.4
-    pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp36-cp36m-linux_x86_64.whl
-    pip3 install https://download.pytorch.org/whl/cu100/torchvision-0.3.0-cp36-cp36m-linux_x86_64.whl
-    pip3 install uproot==3.8.0
-    pip3 install root_numpy==4.8.0
-    pip3 install xgboost==0.90
-    pip3 install numba==0.45.0
-    pip3 install cupy-cuda100==6.2.0
-    pip3 install tqdm==4.32.2
-    pip3 install energyflow==0.12.3
-    pip3 install dm-sonnet==1.34
-    pip3 install prettytable==0.7.2
-    pip3 install pyquil
-    pip3 install torch_geometric==1.3.2 torch_sparse==0.4.3 torch_scatter==1.3.2 torch_cluster==1.4.5
-
-    ### mpi4py ###
+    DYLD_LIBRARY_PATH=$CUDA_PATH/lib:$DYLD_LIBRARY_PATH
+    CPATH=$CUDA_PATH/include:$CPATH
     MPI_PATH=/opt/openmpi-3.1.0
-
     PATH=$MPI_PATH/bin/:$PATH
     LD_LIBRARY_PATH=$MPI_PATH/lib/:$LD_LIBRARY_PATH
     OPAL_PREFIX=$MPI_PATH
 
-    pip3 install mpi4py==3.0.2
-    ## horovod with NCCL, and MPI
-    rpm -i /opt/nccl.rpm
-    yum -y update
-    yum -y install libnccl libnccl-devel libnccl-static
-    HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 pip3 install --no-cache-dir git+https://github.com/horovod/horovod.git
+    ### python3 packages ###    
+    python3 -m pip install --upgrade pip
+    cat /opt/python3.requirement.txt | xargs -n 1 python3 -m pip install
+    jupyter serverextension enable --py jupyterlab --sys-prefix
+    python3 -m ipykernel install
+    ## some remaining python crap
+    #python3 -m pip install scikit-garden==0.1.3
+
+    ### quantum libraries ###
+    scl enable devtoolset-7 -- python3 -m pip install qulacs-gpu==0.1.10.1
+    scl enable devtoolset-7 -- python3 -m pip install pennylane-qulacs["gpu"]==0.12.0
+    python3 -m pip install tensorflow-quantum==0.4.0
+    python3 -m pip install qiskit==0.19.0
+    python3 -m pip install pyquil==2.23.2
+    python3 -m pip install dwave-ocean-sdk==3.1.1
+
+    ### horovod with NCCL, and MPI ###
+    #rpm -i /opt/nccl.rpm
+    #yum -y update
+    #yum -y install libnccl libnccl-devel libnccl-static
+    #HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib64 HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_MPI=1 HOROVOD_GPU_ALLGATHER=MPI HOROVOD_GPU_BROADCAST=MPI HOROVOD_ALLOW_MIXED_GPU_IMPL=1 python3 -m pip install --no-cache-dir git+https://github.com/horovod/horovod.git
 
 %environment
     JUPYTER_RUNTIME_DIR=$HOME/jupyter-runtime
