@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x 
+
 if [ ! -r ~/.cernbox.pass ] ; then
     rm ~/.cernbox.pass
     echo password for cernbox
