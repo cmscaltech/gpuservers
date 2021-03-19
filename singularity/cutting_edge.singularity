@@ -50,7 +50,8 @@ From: nvidia/cuda:10.1-cudnn7-devel-centos7
     yum -y install python${PYTHON} python${PYTHON}-devel python${PYTHON}-pip python${PYTHON}-tkinter python${PYTHON}-venv
 
     ### latex ###
-    yum -y install texlive-pdftex texlive-latex-bin texlive-texconfig* texlive-latex* texlive-metafont* texlive-cmap* texlive-ec texlive-fncychap* texlive-pdftex-def texlive-fancyhdr* texlive-titlesec* texlive-multirow texlive-framed* texlive-wrapfig* texlive-parskip* texlive-caption texlive-ifluatex* texlive-collection-fontsrecommended texlive-collection-latexrecommended dvipng
+    yum -y install texlive-*
+    yum -y install pandoc    
 
     ### ROOT ###
     yum -y install root.x86_64
