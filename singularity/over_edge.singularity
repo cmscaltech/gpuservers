@@ -1,5 +1,5 @@
 Bootstrap: localimage
-From: /storage/group/gpu/software/singularity/ibanks/edge.simg
+From: /storage/af/group/gpu/software/singularity/ibanks/edge.simg
 
 %post
 	CUDA_PATH=/usr/local/cuda/
