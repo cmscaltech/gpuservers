@@ -10,7 +10,7 @@ if [ ! -r ~/.cernbox.pass ] ; then
     chmod 600 ~/.cernbox.pass
 fi
 
-dest_dir=/storage/user/$USER/cernbox
+dest_dir=/storage/af/user/$USER/cernbox
 mkdir -p $dest_dir
 cern_user=$USER
 cern_i=${cern_user:0:1}

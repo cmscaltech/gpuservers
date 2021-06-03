@@ -265,8 +265,8 @@ c.NotebookApp.keyfile = '/etc/grid-security/letsencrypt/privkey.pem'
 #c.NotebookApp.nbserver_extensions = {}
 
 ## The directory to use for notebooks and kernels.
-c.NotebookApp.notebook_dir = '/storage/user/{}'.format(os.environ.get('USER',''))
-#c.NotebookApp.notebook_dir = '/storage/user/'
+c.NotebookApp.notebook_dir = '/storage/af/user/{}'.format(os.environ.get('USER',''))
+#c.NotebookApp.notebook_dir = '/storage/af/user/'
 
 ## Whether to open in a browser after starting. The specific browser used is
 #  platform dependent and determined by the python standard library `webbrowser`
@@ -293,7 +293,7 @@ c.NotebookApp.notebook_dir = '/storage/user/{}'.format(os.environ.get('USER','')
 
 ## The port the notebook server will listen on.
 
-#c.NotebookApp.port = json.loads(open('/storage/group/gpu/software/gpuservers/jupyter/ports').read())[os.getenv('USER')]
+#c.NotebookApp.port = json.loads(open('/storage/af/group/gpu/software/gpuservers/jupyter/ports').read())[os.getenv('USER')]
 c.NotebookApp.port = os.getuid()
 print(os.getenv('USER'),"on port",c.NotebookApp.port)
 ## The number of additional ports to try if the specified port is not available.

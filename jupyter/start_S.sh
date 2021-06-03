@@ -9,7 +9,7 @@ else
     ln -s /tmp/$USER/ipython $HOME/.ipython
 fi
 
-img=/storage/group/gpu/software/singularity/ibanks/edge.simg
+img=/storage/af/group/gpu/software/singularity/ibanks/edge.simg
 if [ ! -z $1 ] ; then
     echo using $1 as image
     img=$1
@@ -17,5 +17,5 @@ fi
 
 ## mount point need to be reviewed
 set -x 
-/storage/group/gpu/software/singularity/run.sh $img /storage/group/gpu/software/gpuservers/jupyter/start.sh
+/storage/af/group/gpu/software/singularity/run.sh $img /storage/af/group/gpu/software/gpuservers/jupyter/start.sh
 

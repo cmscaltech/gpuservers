@@ -27,7 +27,7 @@ check_point_every = 5*60 # seconds
 time_check_point=None
 process_timeout = 60*60 # seconds
 purge = process_timeout * 1.2
-record_file = '/storage/group/gpu/software/gpu-util-{}.json'.format(host)
+record_file = '/storage/af/group/gpu/software/gpu-util-{}.json'.format(host)
 record = {}
 if os.path.isfile( record_file):
     record.update( dict([(int(float(k)),v) for (k,v) in json.loads( open(record_file).read()).items()]))

@@ -31,5 +31,5 @@ images/edge.simg: cutting_edge.singularity
 	./build $@ $<
 
 deploy:
-	cp -R images/*.simg /storage/group/gpu/software/singularity/ibanks/
-	chown -R root:gpuusers /storage/group/gpu/software/singularity/ibanks/
+	cp -R images/*.simg /storage/af/group/gpu/software/singularity/ibanks/
+	chown -R root:gpuusers /storage/af/group/gpu/software/singularity/ibanks/

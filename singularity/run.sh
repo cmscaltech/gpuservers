@@ -28,7 +28,7 @@ if [ -d "/cvmfs" ] ; then
 fi
 
 ex=""
-img=/storage/group/gpu/software/singularity/ibanks/edge.simg
+img=/storage/af/group/gpu/software/singularity/ibanks/edge.simg
 if [ ! -z $1 ] ; then
     if [ -r $1 ] ; then
 	echo using $1 as image
