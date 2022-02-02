@@ -1,11 +1,12 @@
 from __future__ import print_function
+import setGPU
 import argparse
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
-
+import time
 
 class Net(nn.Module):
     def __init__(self):
@@ -74,7 +75,7 @@ def main():
                         help='disables CUDA training')
     parser.add_argument('--seed', type=int, default=1, metavar='S',
                         help='random seed (default: 1)')
-    parser.add_argument('--log-interval', type=int, default=10, metavar='N',
+    parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                         help='how many batches to wait before logging training status')
     
     parser.add_argument('--save-model', action='store_true', default=False,
@@ -108,11 +109,14 @@ def main():
     print("model set")
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
     print("optimizer set")
+    start=time.mktime(time.gmtime())
     for epoch in range(1, args.epochs + 1):
         train(args, model, device, train_loader, optimizer, epoch)
         test(args, model, device, test_loader)
         print ("epoch",epoch)
-
+    stop=time.mktime(time.gmtime())
+    print('Train time:',stop-start)
+    print('Time/epoch:',(stop-start)/float(args.epochs))
     if (args.save_model):
         torch.save(model.state_dict(),"mnist_cnn.pt")
         
