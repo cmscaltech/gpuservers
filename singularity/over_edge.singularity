@@ -8,33 +8,8 @@ From: /storage/af/group/gpu/software/singularity/ibanks/edge.simg
 	DYLD_LIBRARY_PATH=$CUDA_PATH/lib:$DYLD_LIBRARY_PATH
 	CPATH=$CUDA_PATH/include:$CPATH
 
-	##qulacs gpu support
-	#cmake3 => cmake
-	#yum -y install cmake3
-	#ln -s `which cmake3` /usr/bin/cmake
- 
-	#gcc7
-	#yum -y install centos-release-scl
-	#yum -y install devtoolset-7
-
-	#qulacs-gpu
-	#scl enable devtoolset-7 -- pip3 install qulacs-gpu
-	#scl enable devtoolset-7 -- pip3 install git+https://github.com/cnktysz/pennylane-qulacs@master
-
-	#machine learning
-	pip3 install grpcio
-        pip3 install tensorflow-gpu
-	pip3 install tensorflow-quantum
-
-
-	#pip3 install torch==1.2.0
-	#pip3 install torch-scatter==1.4.0 torch-sparse==0.4.3 torch-cluster==1.4.5
-	#pip3 install torch-spline-conv==1.1.1
-	#pip3 install torch-geometric==1.3.2
-
-	#check
-	#python3 -c "import torch; print(torch.__version__)"
-	#python3 -c "import torch; print(torch.cuda.is_available())"
-	#python3 -c "import torch; print(torch.version.cuda)"
-	#nvcc --version
+	python3 -m pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
+	python3	-m pip install torch-sparse -f	https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
+	python3 -m pip install torch-cluster -f	https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
+	python3 -m pip install torch-spline-conv -f	https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
 
