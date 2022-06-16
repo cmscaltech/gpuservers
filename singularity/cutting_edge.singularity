@@ -1,6 +1,4 @@
 BootStrap: docker
-#From: nvidia/cuda:11.0-cudnn8-devel-centos7
-#From: nvidia/cuda:10.1-cudnn7-devel-centos7
 From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
 
 %runscript
@@ -10,8 +8,8 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
 
 
 %files
-    /storage/af/group/gpu/software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
-    /storage/af/group/gpu/software/rigetti/forest-sdk-2.10.0-linux-rpm /opt/forest-sdk
+    #      /storage/af/group/gpu/software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
+    #      /storage/af/group/gpu/software/rigetti/forest-sdk-2.10.0-linux-rpm /opt/forest-sdk
     #      /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
     /storage/af/group/gpu/software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
 
@@ -34,11 +32,12 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     #llvm clang
     yum -y install llvm llvm-devel llvm-static
 
-    PYTHON=3
+    PYTHON=38
     yum -y install vim-X11 vim-common vim-enhanced vim-minimal
-    yum -y install python${PYTHON} python${PYTHON}-devel python${PYTHON}-pip python${PYTHON}-tkinter python${PYTHON}-virtualenv
-
-    yum -y install nvidia-driver
+    yum -y install python${PYTHON} python${PYTHON}-devel python${PYTHON}-pip python${PYTHON}-tkinter
+    #yum -y install python${PYTHON}-virtualenv
+    
+    #TBFyum -y install nvidia-driver
 
     yum -y install openssl-devel
     yum -y install openssh-server openssh-clients 
@@ -46,7 +45,8 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
 
 
     yum -y install boost boost-devel
-    yum -y install nodejs
+    #yum -y install nodejs
+    yum -y install nodejs-1:10.24.0-1.module_el8.3.0+717+fa496f1d.x86_64
     npm install -g configurable-http-proxy
 
     ### latex ###
@@ -54,16 +54,22 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
 
     yum -y install root.x86_64
     yum -y install root-spectrum.x86_64
-    yum -y install python${PYTHON}-root.x86_64
-    yum -y install --enablerepo=powertools python${PYTHON}-jupyroot.x86_64
+    ##yum -y install root-notebook
+    ##uses python3.6 == broken
+    yum -y install python3-root.x86_64
+    yum -y install --enablerepo=powertools python3-jupyroot.x86_64
 
     ### rigetti SDK
-    cd /opt/forest-sdk
-    yum install -y --enablerepo=powertools lapack-devel blas-devel
-    ./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
-    cd - 
+    #re-enable on demand
+    #cd /opt/forest-sdk
+    #yum install -y --enablerepo=powertools lapack-devel blas-devel
+    #./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
+    #cd - 
 
     ### python3 packages ###    
+    rm -f /usr/bin/python3 /usr/bin/python
+    ln -s /usr/bin/python3.8 /usr/bin/python
+    ln -s /usr/bin/python3.8 /usr/bin/python3
 
     CUDA_PATH=/usr/local/cuda/
     LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
@@ -122,17 +128,13 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     python3 -m pip install xgboost
     python3 -m pip install tensorflow
     #python3 -m pip install Keras
-    python3 -m pip install keras-rl    
-    python3 -m pip install torch==1.10.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
-    python3 -m pip install torchvision==0.11.0+cu113 -f https://download.pytorch.org/whl/torch_stable.html
-    python3 -m pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
-    python3 -m pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
-    python3 -m pip install torch-cluster -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
-    python3 -m pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-1.10.0%2Bcu113.html
-    python3 -m pip install torch-geometric
+    python3 -m pip install keras-rl
+    python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+    python3 -m pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
 
 
     #quantum
+    python3 -m pip install dwave-ocean-sdk
     python3 -m pip install qulacs-gpu
     python3 -m pip install pennylane-qulacs["gpu"]
     python3 -m pip install tensorflow-quantum
