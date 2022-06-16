@@ -118,6 +118,19 @@ if you make changes to existing image, please provide suggestion via a pull requ
 
 If you are building on top of an existing image, you can use that image as base and the build time will be greatly reduced. See an example with [building on top the edge image](https://github.com/cmscaltech/gpuservers/blob/master/singularity/over_edge.singularity).
 
+##### Sandbox 
+It might be practical to try live a singularity recipe instead of building it with test/fail. In this case, you need to create a sandbox and run it in writable mode and execute build commands that you can later copy back in the recipe
+
+<pre>
+singularity build --sandbox SANDBOXTOBECREATED/ existin.simg
+singularity shell --writable SANDBOXTOBECREATED/
+</pre>
+
+an singularity image can be created back from the sandbox
+<pre>
+singularity build final.simg SANDBOXTOBECREATED/
+</pre>
+
 ### Tensorflow
 
 Tensorflow is greedy in using GPUs and it is mandatory to use `export CUDA_VISIBLE_DEVICES=n` (where n is the index of a device, or coma separated index) to use only a selected device, if not explicitly controlled within the application.
