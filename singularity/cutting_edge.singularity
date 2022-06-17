@@ -2,14 +2,25 @@ BootStrap: docker
 From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
 
 %runscript
+    python3 -c "import tensorflow_quantum as tfq"
+    python3 -c "import tensorflow"
     python3 -c "import keras"
     python3 -c "import torch;print(torch.cuda.is_available())"
-    python3 -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
+    python3.6m -c "import ROOT;import ROOT.TSpectrum as sp;s=sp()"
 
+    mkdir -p /tmp/$USER/cuda/
+    export CUDA_CACHE_PATH=/tmp/$USER/cuda/
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_keras.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_pytorch.py
 
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_pnl.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_tfq.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_cirq.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_qulacs.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_pyquil.py
+    
 %files
-    #      /storage/af/group/gpu/software/dwave/sapi-python-client-3.0.1-linux64 /opt/sapi-python-client
-    #      /storage/af/group/gpu/software/rigetti/forest-sdk-2.10.0-linux-rpm /opt/forest-sdk
+    /storage/af/group/gpu/software/rigetti/forest-sdk-2.23.0-linux-rpm /opt/forest-sdk
     #      /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
     /storage/af/group/gpu/software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
 
@@ -25,6 +36,9 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     yum -y install epel-release
     yum -y install which
 
+    yum install -y dnf-plugins-core
+    dnf config-manager --set-enabled powertools
+	
     yum -y install emacs-nox
     yum -y install git
     yum -y install cmake3
@@ -57,14 +71,16 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     ##yum -y install root-notebook
     ##uses python3.6 == broken
     yum -y install python3-root.x86_64
-    yum -y install --enablerepo=powertools python3-jupyroot.x86_64
+    yum -y install python3-jupyroot.x86_64
 
-    ### rigetti SDK
-    #re-enable on demand
-    #cd /opt/forest-sdk
-    #yum install -y --enablerepo=powertools lapack-devel blas-devel
-    #./forest-sdk-2.10.0-linux-rpm.run --accept --quiet
-    #cd - 
+    ### rigetti SDK quilc, etc
+    yum install -y lapack-devel blas-devel
+    cd /opt/forest-sdk/
+    ./forest-sdk-2.23.0-linux-rpm.run --target unt --noexec
+    cd -
+    cd /opt/forest-sdk/unt
+    yum install -y forest-sdk-2.23.0-1.x86_64.rpm
+    cd - 
 
     ### python3 packages ###    
     rm -f /usr/bin/python3 /usr/bin/python
@@ -126,7 +142,8 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     python3 -m pip install scikit-image
     python3 -m pip install scikit-optimize
     python3 -m pip install xgboost
-    python3 -m pip install tensorflow
+    #version is limited due to tf-quantum
+    python3 -m pip install tensorflow==2.7.0
     #python3 -m pip install Keras
     python3 -m pip install keras-rl
     python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
@@ -140,7 +157,7 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     python3 -m pip install tensorflow-quantum
     python3 -m pip install cirq
     python3 -m pip install qiskit==0.19.0
-    python3 -m pip install pyquil
+    #SDK unavailable python3 -m pip install pyquil
 
 
     ### horovod with NCCL, and MPI

@@ -44,7 +44,11 @@ fi
 set -x 
 ## mount point need to be reviewed
 if [ ! -z "$ex" ] ; then
-    XDG_RUNTIME_DIR="" JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity exec $binding --nv $img $ex
+    if [ "$ex" == "test" ] ; then
+	XDG_RUNTIME_DIR="" JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity run $binding --nv $img
+    else
+	XDG_RUNTIME_DIR="" JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity exec $binding --nv $img $ex
+    fi
 else
     XDG_RUNTIME_DIR="" JUPYTER_DATA_DIR=/tmp/$USER/jupyter LC_ALL=C singularity shell $binding --nv $img
 fi
