@@ -20,7 +20,10 @@ q0, q1 = cirq.GridQubit.rect(1, 2)
 # Create a circuit on these qubits using the parameters you created above.
 circuit = cirq.Circuit(
     cirq.rx(a).on(q0),
-    cirq.ry(b).on(q1), cirq.CNOT(control=q0, target=q1))
+    cirq.ry(b).on(q1),
+    #cirq.CNOT(control=q0, target=q1)
+    cirq.CNOT(q0,q1)
+)
 
 ##visualize SVGCircuit(circuit)
 
