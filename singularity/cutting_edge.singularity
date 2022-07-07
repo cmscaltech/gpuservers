@@ -18,11 +18,12 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     python3 /storage/af/group/gpu/software/gpuservers/scripts/test_cirq.py
     python3 /storage/af/group/gpu/software/gpuservers/scripts/test_qulacs.py
     python3 /storage/af/group/gpu/software/gpuservers/scripts/test_pyquil.py
+    python3 /storage/af/group/gpu/software/gpuservers/scripts/test_sf.py
     
 %files
     /storage/af/group/gpu/software/rigetti/forest-sdk-2.23.0-linux-rpm /opt/forest-sdk
-    #      /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
-    /storage/af/group/gpu/software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
+    #    /opt/openmpi-3.1.0 /opt/openmpi-3.1.0
+    #    /storage/af/group/gpu/software/nvidia/nvidia-machine-learning-repo-rhel7-1.0.0-1.x86_64.rpm /opt/nccl.rpm
 
 %post
     echo "assumeyes=1" >> /etc/yum.conf
@@ -72,6 +73,8 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     ##uses python3.6 == broken
     yum -y install python3-root.x86_64
     yum -y install python3-jupyroot.x86_64
+    # for nb convert
+    yum -y install pandoc
 
     ### rigetti SDK quilc, etc
     yum install -y lapack-devel blas-devel
@@ -158,6 +161,7 @@ From: nvidia/cuda:11.3.0-cudnn8-devel-centos8
     python3 -m pip install qulacs-gpu
     python3 -m pip install pennylane-qulacs["gpu"]
     python3 -m pip install tensorflow-quantum
+    python3 -m pip install strawberryfields
     python3 -m pip install cirq
     python3 -m pip install qiskit==0.19.0
     #SDK unavailable python3 -m pip install pyquil
