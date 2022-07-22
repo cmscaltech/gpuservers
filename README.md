@@ -2,8 +2,7 @@
 
 ## Nodes and Access
 
-The head node `ibanks.hep.caltech.edu` is running the nfs home and data server.
-It has a public (regular network) and a private (10G) IP.
+The head node `login1.hep.caltech.edu` is only used for submitting job in batch.
 
 Worker nodes are a follows, in chronological order of creation
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
@@ -12,7 +11,7 @@ Worker nodes are a follows, in chronological order of creation
 * `mawhrin-skel-sm.hep.caltech.edu` is a Supermicro server with 2T of local NVME running 2 NVidia GeForce GTX Titan X
 
 All server have a public (regular network) and a private (10G) IP.
-SSH key is the only authentication. Please let the admins (t2admin AT hep.caltech.edu) in case of issues.
+SSH key is the only authentication, with double factor authentication. Please let the admins (t2admin AT hep.caltech.edu) in case of issues.
  
 ## Credits
 
@@ -25,16 +24,7 @@ Part of this work was conducted at  "\textit{iBanks}", the AI GPU cluster at Cal
 
 ## Credentials
 
-If you are not familiar on how to create an ssh key, from a remote client (your laptop) run the following command
-<pre>
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-</pre>
-this should create an ssh key (default id_rsa) and a public key (id_rsa.pub). Send content of the public key (id_rsa.pub) to an administrator.
-You can log in to the nodes using
-<pre>
-ssh -i id_rsa flere-imsaho-sm.hep.caltech.edu
-</pre>
-or [configure the ssh client](https://www.ssh.com/ssh/config/) to present the key automatically.
+Follow the instructions for [Tier 2 access](https://tier2.hep.caltech.edu/?page_id=11) to get access to ibanks nodes.
 
 ### Data Storage
 
