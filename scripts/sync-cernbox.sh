@@ -15,7 +15,7 @@ mkdir -p $dest_dir
 cern_user=$USER
 cern_i=${cern_user:0:1}
 #server=cernbox.cern.ch 
-server=https://cernbox.cern.ch/cernbox/desktop/remote.php/webdav/eos/user/$cern_i/$cern_user
+server=ownclouds://cernbox.cern.ch/cernbox/desktop/remote.php/webdav/home/
 ping=2
 
 while [ 1 ]; do
