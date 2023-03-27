@@ -2,7 +2,7 @@
 
 ## Nodes and Access
 
-The head node `login1.hep.caltech.edu` is only used for submitting job in batch.
+The head nodes `login-[1,2,3].hep.caltech.edu` are only used for submitting job in batch.
 
 Worker nodes are a follows, in chronological order of creation
 * `culture-plate-sm.hep.caltech.edu` is a Supermicro server with 2T of local SSD, and runs 8 NVidia GeForce GTX 1080
