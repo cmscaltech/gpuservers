@@ -112,13 +112,13 @@ If you are building on top of an existing image, you can use that image as base 
 It might be practical to try live a singularity recipe instead of building it with test/fail. In this case, you need to create a sandbox and run it in writable mode and execute build commands that you can later copy back in the recipe
 
 <pre>
-singularity build --sandbox SANDBOXTOBECREATED/ existin.simg
-singularity shell --writable SANDBOXTOBECREATED/
+apptainer build --sandbox SANDBOXTOBECREATED/ existin.simg
+apptainer shell --writable SANDBOXTOBECREATED/
 </pre>
 
 an singularity image can be created back from the sandbox
 <pre>
-singularity build final.simg SANDBOXTOBECREATED/
+apptainer build final.simg SANDBOXTOBECREATED/
 </pre>
 
 ### Tensorflow
